@@ -1,11 +1,13 @@
-package com.albion.common.search.bst;
-
+package com.albion.search;
 
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.albion.common.search.bst.Traversal;
+import com.albion.common.search.bst.PostOrderTraversal;
+import com.albion.common.search.bst.InOrderTraversal;
+import com.albion.common.search.bst.BinaryTreeInversion;
 import com.albion.common.tree.BinaryTree;
 import com.albion.common.tree.BinaryTreePrinter;
 import com.albion.common.tree.TreeNode;
@@ -20,18 +22,18 @@ public class BinaryTreeTest {
 //			bt.insert(data[i]);
 //		}
 ////		bt.traverse();
-//		
+//
 //		TreeNode<Integer> t = bt.binarySearch(10);
 //		Assert.assertTrue(t != null, "nothing found!!!!!!");
 //		Assert.assertEquals(t.getValue().toString(), "10");
-//		
+//
 //		bt.delete(5);
 //		bt.traverse();
 //	}
-	
+
 	@DataProvider(name = "d01")
 	public Object[][] testPrint01() {
-	
+
 	        TreeNode<Integer> root = new TreeNode<Integer>(2);
 	        TreeNode<Integer> n11 = new TreeNode<Integer>(7);
 	        TreeNode<Integer> n12 = new TreeNode<Integer>(5);
@@ -57,7 +59,7 @@ public class BinaryTreeTest {
 	        Object[][] retVal = new Object[][] {{root}};
 	        return retVal;
 	}
-	
+
 	@DataProvider(name = "d02")
 	public Object[][] buildBinarySearchTree02() {
 			//Page 290
@@ -72,92 +74,92 @@ public class BinaryTreeTest {
 	        TreeNode<Integer> n04 = new TreeNode<Integer>(4);
 	        TreeNode<Integer> n13 = new TreeNode<Integer>(13);
 	        TreeNode<Integer> n09 = new TreeNode<Integer>(9);
-	        
+
 	        root.parent = null;
 	        root.left = n06;
 	        root.right = n18;
-	        
+
 	        n06.left = n03;
 	        n06.right = n07;
 	        n06.parent = root;
-	        
+
 	        n18.left = n17;
 	        n18.right = n20;
 	        n18.parent = root;
-	        
+
 	        n03.left = n02;
 	        n03.right = n04;
 	        n03.parent = n06;
-	        
+
 	        n07.right = n13;
 	        n07.parent = n06;
 
 	        n17.parent = n18;
 	        n20.parent = n18;
-	        
+
 	        n13.left = n09;
 	        n13.parent = n07;
-	        
+
 	        n09.parent = n13;
-	        
+
 	        Object[][] retVal = new Object[][] {{root}};
 	        return retVal;
 	}
-	
-	
-	
+
+
+
 	@Test(dataProvider = "d02")
 	public void testTreePrint(TreeNode<Integer> root) {
 		BinaryTreePrinter.printNode(root);
 	}
-	
+
 	@Test(dataProvider = "d02")
 	public void testInOrderTraversal(TreeNode<Integer> root) {
 		Traversal t = new InOrderTraversal<Integer>(root);
 		t.traverse();
 	}
-	
+
 	@Test(dataProvider = "d02")
 	public void testPostOrderTraversal(TreeNode<Integer> root) {
 		Traversal t = new PostOrderTraversal<Integer>(root);
 		t.traverse();
 	}
-	
+
 	@Test
 	public void testBinaryTreeProperties() {
 		Integer[] array = {15, 6, 18, 3, 7, 17, 20, 2, 4, 13, 9};
 		BinaryTree bt = new BinaryTree();
-		
+
 		for(Integer x : array) {
 			bt.insert(x);
 		}
-		
+
 		TreeNode<Integer> root = bt.getRoot();
 		BinaryTreePrinter.printNode(root);
-		
+
 		TreeNode<Integer> seek = bt.find(9);
 		if(seek != null) {
 			seek.print();
 		}
 		Assert.assertTrue(seek != null);
 	}
-	
-	
+
+
 	@Test
 	public void testInversion() {
 		Integer[] array = {15, 6, 18, 3, 7, 17, 20, 2, 4, 13, 9};
 		BinaryTree bt = new BinaryTree();
-		
+
 		for(Integer x : array) {
 			bt.insert(x);
 		}
-		
+
 		TreeNode<Integer> root = bt.getRoot();
 		BinaryTreePrinter.printNode(root);
-		
+
 		BinaryTreeInversion bti = new BinaryTreeInversion(root);
 		bti.invert();
-		
+
 		BinaryTreePrinter.printNode(root);
 	}
 }
