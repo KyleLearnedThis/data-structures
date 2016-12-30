@@ -1,5 +1,7 @@
-package com.albion.common.search.graph;
+package com.albion.common.search;
 
+import com.albion.common.search.graph.BreathFirstSearch;
+import com.albion.common.search.graph.DepthFirstSearch;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

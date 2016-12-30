@@ -1,4 +1,4 @@
-package com.albion.search;
+package com.albion.common.search;
 
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
