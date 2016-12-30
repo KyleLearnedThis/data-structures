@@ -12,3 +12,4 @@ target/*
 test-output/*
 .settings/*
 /.idea/
+.idea/
