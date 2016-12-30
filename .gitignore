@@ -11,3 +11,4 @@ Thumbs.db
 target/*
 test-output/*
 .settings/*
+/.idea/
