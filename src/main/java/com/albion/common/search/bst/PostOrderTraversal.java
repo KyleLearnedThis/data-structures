@@ -2,7 +2,7 @@ package com.albion.common.search.bst;
 
 import com.albion.common.tree.TreeNode;
 
-public class PostOrderTraversal<T extends Comparable<?>> implements Traversal  {
+public class PostOrderTraversal<T extends Comparable<?>> implements Traversal {
 
 	protected TreeNode<T> root;
 
