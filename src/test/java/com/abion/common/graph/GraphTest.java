@@ -1,4 +1,4 @@
-package com.albion.common.test;
+package com.abion.common.graph;
 
 import org.testng.annotations.Test;
 

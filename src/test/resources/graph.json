@@ -1,0 +1,88 @@
+{
+  "graph" : {
+    "vertices" : [
+      {
+        "vertex" : {
+          "id" : "1",
+          "root": true,
+          "edges" : [
+            {
+              "id": "2",
+              "weight" : "8",
+              "direction" : "BOTH"
+            },
+            {
+              "id": "3",
+              "weight" : "9",
+              "direction" : "BOTH"
+            }
+          ]
+        }
+      },
+      {
+        "vertex": {
+          "id": "2",
+          "root": false,
+          "edges": [
+            {
+              "id": "1",
+              "weight": "8",
+              "direction": "BOTH"
+            },
+            {
+              "id": "3",
+              "weight": "6",
+              "direction": "BOTH"
+            },
+            {
+              "id": "4",
+              "weight": "7",
+              "direction": "BOTH"
+            }
+          ]
+        }
+      },
+      {
+        "vertex": {
+          "id": "3",
+          "root": false,
+          "edges": [
+            {
+              "id": "1",
+              "weight": "9",
+              "direction": "BOTH"
+            },
+            {
+              "id": "2",
+              "weight": "6",
+              "direction": "BOTH"
+            },
+            {
+              "id": "4",
+              "weight": "5",
+              "direction": "BOTH"
+            }
+          ]
+        }
+      },
+      {
+        "vertex" : {
+          "id" : "4",
+          "root": true,
+          "edges" : [
+            {
+              "id": "2",
+              "weight" : "7",
+              "direction" : "BOTH"
+            },
+            {
+              "id": "3",
+              "weight" : "5",
+              "direction" : "BOTH"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

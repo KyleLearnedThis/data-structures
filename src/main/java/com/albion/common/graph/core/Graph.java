@@ -1,16 +1,15 @@
 package com.albion.common.graph.core;
 
+import com.albion.common.utils.XPathTask;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import com.albion.common.utils.XPathTask;
 
 /*
  * 	private T x; private T y;private W weight;
@@ -30,6 +29,41 @@ public class Graph{
 	}
 
 	public void parseInput(String filePath){
+		XPathTask xpt = null;
+		File inputFile = new File(filePath);
+
+		try {
+			xpt = new XPathTask(inputFile);
+			NodeList vertexList = xpt.processQuery("//vertices/vertex");
+
+			for(int i = 0; i < vertexList.getLength(); i++){
+				Node nNode = vertexList.item(i);
+				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+					Element elem = (Element) nNode;
+
+					int vertexId = Integer.parseInt(elem.getAttribute("id"));
+					Vertex vertex = new Vertex(vertexId);
+					String isRootString = elem.getAttribute("root");
+					if(!"".equals(isRootString)&&isRootString.equals("true")){
+						if(getRoot()!=null){
+							throw new IllegalArgumentException("root was already set once.");
+						}
+						else{
+							setRoot(vertex);
+						}
+					}
+
+					NodeList edgeList = elem.getElementsByTagName("edge");
+					addEdgesToAVertex(vertex, edgeList);
+					getGraph().put(new Integer(vertexId), vertex);
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void parseInputV2(String filePath){
 		XPathTask xpt = null;
 		File inputFile = new File(filePath);
 

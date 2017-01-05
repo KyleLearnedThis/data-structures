@@ -1,5 +1,7 @@
-package com.albion.common.search.graph;
+package com.albion.common.search;
 
+import com.albion.common.search.graph.BreathFirstSearch;
+import com.albion.common.search.graph.DepthFirstSearch;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -10,7 +12,7 @@ public class GraphSearchTest {
 
   @Test
   public void testBFS01() {
-	  String filePath2 = "src/com/albion/common/data/graph01.xml";
+	  String filePath2 = "src/test/resources/graph01.xml";
 	  Graph g = new Graph(filePath2);
 	  System.out.println("HEY: "+g.toString());
 	  Vertex v = BreathFirstSearch.locate(g, 4);
@@ -22,7 +24,7 @@ public class GraphSearchTest {
   
   @Test
   public void testDFS01() {
-	  String filePath2 = "src/com/albion/common/data/graph01.xml";
+	  String filePath2 = "src/test/resources/graph01.xml";
 	  Graph g = new Graph(filePath2);
 	  System.out.println("HEY: "+g.toString());
 	  Vertex v = DepthFirstSearch.locate(g, 4);
