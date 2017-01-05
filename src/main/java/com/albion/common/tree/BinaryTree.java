@@ -16,7 +16,7 @@ public class BinaryTree {
 
 	public void insert(Integer data){
 		if (root == null) {
-			root = new TreeNode<Integer>(data, null, null, null);    
+			root = new TreeNode<>(data, null, null, null);
 		}else{
 			internalInsert(root, data);
 		}
@@ -40,27 +40,6 @@ public class BinaryTree {
 			}       
 		}
 	}
-
-//	public void traverse(){
-//		traverseTreeInOrder(root);
-//	}
-//
-//	public void traverseTreeInOrder(TreeNode<Integer> node) {
-//		//incoming node is root
-//		Stack< TreeNode<Integer> > nodes = new Stack<TreeNode<Integer> >();
-//		while (!nodes.isEmpty() || null != node) {
-//			if (null != node) {
-//				nodes.push(node);
-//				node = node.getLeft();
-//			} else {
-//				node = nodes.pop();
-//				//	            System.out.println("V="+node.getValue()+ " P="+);
-//				node.print(false);
-//
-//				node = node.getRight();
-//			}
-//		}                           
-//	}
 
 	public TreeNode<Integer> find(Integer seek){
 
@@ -105,28 +84,11 @@ public class BinaryTree {
 		}
 		else{
 			//Lazy, replace value only
-			
 			temp = node.getRight().minNode();
 			System.out.println("WHO WHO 1:" + temp.getValue().toString());
 			
 			TreeNode<Integer> tempParent = temp.getParent();
 			System.out.println("WHO WHO 2:" + tempParent.getValue().toString());
-			
-
-			
-//			
-//			
-//			
-//			//break temp parent child link
-//			if(tempParent.getValue() > temp.getValue())
-//				tempParent.setLeft(null);
-//			else		
-//				tempParent.setRight(null);
-//			node.setValue(temp.getValue());
-			
-//			temp.setParent(null);
-
-
 		}
 	}
 
