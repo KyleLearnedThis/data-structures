@@ -43,7 +43,7 @@ public class Vertex {
 	//hello
 	public String toString(){
 		StringBuffer s = new StringBuffer();
-		s.append("[Vertex ID]-["+id+"]\n");
+		s.append("[VERTEX ID: "+id+"]\n");
 		s.append("[EDGES]\n");
 		for(Edge edge:edgeList){
 			s.append(edge.toString());

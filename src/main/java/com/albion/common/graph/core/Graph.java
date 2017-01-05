@@ -14,26 +14,21 @@ import java.util.Map;
 /*
  * 	private T x; private T y;private W weight;
  * 	private M id; private N data;
- *  hi hi 
  */
 public class Graph{
-	private HashMap< Integer, Vertex> graph;
+	private HashMap<Integer, Vertex> graph;
 	private Vertex root = null;
 
 	public Graph(String filePath){
-		setGraph(new HashMap<Integer, Vertex>());
+		setGraph(new HashMap<>());
 		parseInput(filePath);	
 	}
 
-	public Graph(){
-	}
-
 	public void parseInput(String filePath){
-		XPathTask xpt = null;
 		File inputFile = new File(filePath);
 
 		try {
-			xpt = new XPathTask(inputFile);
+			XPathTask xpt = new XPathTask(inputFile);
 			NodeList vertexList = xpt.processQuery("//vertices/vertex");
 
 			for(int i = 0; i < vertexList.getLength(); i++){
@@ -58,49 +53,13 @@ public class Graph{
 					getGraph().put(new Integer(vertexId), vertex);
 				}
 			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	public void parseInputV2(String filePath){
-		XPathTask xpt = null;
-		File inputFile = new File(filePath);
-
-		try {
-			xpt = new XPathTask(inputFile);
-			NodeList vertexList = xpt.processQuery("//vertices/vertex");
-
-			for(int i = 0; i < vertexList.getLength(); i++){
-				Node nNode = vertexList.item(i);
-				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-					Element elem = (Element) nNode;
-
-					int vertexId = Integer.parseInt(elem.getAttribute("id"));
-					Vertex vertex = new Vertex(vertexId);
-					String isRootString = elem.getAttribute("root");
-					if(!"".equals(isRootString)&&isRootString.equals("true")){
-						if(getRoot()!=null){
-							throw new IllegalArgumentException("root was already set once.");
-						}
-						else{
-							setRoot(vertex);
-						}
-					}
-
-					NodeList edgeList = elem.getElementsByTagName("edge");
-					addEdgesToAVertex(vertex, edgeList);
-					getGraph().put(new Integer(vertexId), vertex);
-				}
-			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	public Vertex addEdgesToAVertex(Vertex vertex, NodeList list){
-		List<Edge> edgeList = new ArrayList<Edge>();
+		List<Edge> edgeList = new ArrayList<>();
 		for(int j = 0; j < list.getLength(); j++){
 			Node mNode = list.item(j);
 			if (mNode.getNodeType() == Node.ELEMENT_NODE) {
@@ -110,7 +69,9 @@ public class Graph{
 				String direction = elem.getAttribute("direction");
 
 				Directions way;
-				if(direction.equals("A_TO_B")){
+				if(!"".equals(direction)){
+					way = Directions.BOTH;
+				}else if(direction.equals("A_TO_B")){
 					way = Directions.A_TO_B;
 				}else if(direction.equals("B_TO_A")){
 					way = Directions.B_TO_A;
@@ -118,6 +79,9 @@ public class Graph{
 					way = Directions.BOTH;
 				}
 
+				if("".equals(weight)){
+					weight = "0";
+				}
 				Edge edge = new Edge(vertex.getId(), Integer.parseInt(id), way, Integer.parseInt(weight));
 				edgeList.add(edge);
 			}
@@ -154,5 +118,17 @@ public class Graph{
 			s.append(v.toString());
 		}
 		return s.toString();
+	}
+
+	public Vertex[] getVertexArray() {
+		int size = graph.size();
+		Vertex[] v = new Vertex[size];
+		int index = 0;
+		for(Map.Entry<Integer, Vertex> entry : graph.entrySet()) {
+			Vertex value = entry.getValue();
+			v[index] = value;
+			index++;
+		}
+		return v;
 	}
 }
