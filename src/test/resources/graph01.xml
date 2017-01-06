@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<graph>
+<verticesMap>
     <vertices>
 	    <vertex id="1" root="true" >
 	        <edge id="2" weight="8" direction="BOTH" />
@@ -20,4 +20,4 @@
 	        <edge id="3" weight="5" direction="BOTH" />  
 	    </vertex>		    	    
     </vertices>
-</graph>
+</verticesMap>

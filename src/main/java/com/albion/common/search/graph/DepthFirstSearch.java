@@ -10,6 +10,7 @@ import java.util.Stack;
 public class DepthFirstSearch {
 	public static Vertex locate(Graph graph, Integer id){
 		Stack<Vertex> stack = new Stack<Vertex>();
+		graph.getVertex(0);
 		Vertex root = graph.getRoot();
 
 		stack.add(root);

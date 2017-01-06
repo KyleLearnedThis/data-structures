@@ -16,11 +16,11 @@ import java.util.Map;
  * 	private M id; private N data;
  */
 public class Graph{
-	private HashMap<Integer, Vertex> graph;
+	private HashMap<Integer, Vertex> verticesMap;
 	private Vertex root = null;
 
 	public Graph(String filePath){
-		setGraph(new HashMap<>());
+		setVerticesMap(new HashMap<>());
 		parseInput(filePath);	
 	}
 
@@ -44,14 +44,13 @@ public class Graph{
 							throw new IllegalArgumentException("root was already set once.");
 						}
 						else{
-						    vertex.setRoot(true);
 							setRoot(vertex);
 						}
 					}
 
 					NodeList edgeList = elem.getElementsByTagName("edge");
 					addEdgesToAVertex(vertex, edgeList);
-					getGraph().put(new Integer(vertexId), vertex);
+					getVerticesMap().put(new Integer(vertexId), vertex);
 				}
 			}
 		} catch (Exception e) {
@@ -91,16 +90,16 @@ public class Graph{
 		return vertex;
 	}
 
-	public HashMap< Integer, Vertex> getGraph() {
-		return graph;
+	public HashMap< Integer, Vertex> getVerticesMap() {
+		return verticesMap;
 	}
 
 	public Vertex getVertex(int id){
-		return this.graph.get(id);
+		return this.verticesMap.get(id);
 	}
 
-	public void setGraph(HashMap< Integer, Vertex> graph) {
-		this.graph = graph;
+	public void setVerticesMap(HashMap< Integer, Vertex> verticesMap) {
+		this.verticesMap = verticesMap;
 	}
 
 	public Vertex getRoot() {
@@ -113,7 +112,7 @@ public class Graph{
 
 	public String toString(){
 		StringBuffer s = new StringBuffer();
-		for(Map.Entry<Integer, Vertex> entry:graph.entrySet()){
+		for(Map.Entry<Integer, Vertex> entry: verticesMap.entrySet()){
 			Vertex v = entry.getValue();
 			s.append(v.toString());
 		}
@@ -121,10 +120,10 @@ public class Graph{
 	}
 
 	public Vertex[] getVertexArray() {
-		int size = graph.size();
+		int size = verticesMap.size();
 		Vertex[] v = new Vertex[size];
 		int index = 0;
-		for(Map.Entry<Integer, Vertex> entry : graph.entrySet()) {
+		for(Map.Entry<Integer, Vertex> entry : verticesMap.entrySet()) {
 			Vertex value = entry.getValue();
 			v[index] = value;
 			index++;
