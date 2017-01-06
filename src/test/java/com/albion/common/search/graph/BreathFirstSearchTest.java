@@ -11,7 +11,7 @@ public class BreathFirstSearchTest {
     public void testLocate() throws Exception {
         String filePath2 = "src/test/resources/graph01.xml";
         Graph g = new Graph(filePath2);
-        System.out.println("HEY: "+g.toString());
+        System.out.println(g.toString());
         Vertex v = BreathFirstSearch.locate(g, 4);
         Assert.assertNotNull(v);
         Assert.assertEquals(v.getId(), 4);

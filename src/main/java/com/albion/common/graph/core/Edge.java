@@ -48,7 +48,7 @@ public class Edge {
 		this.direction = direction;
 	}
 	public String toString(){
-		String s = "{"+x+","+y+"}  [weight: "+weight+"]-["+direction+"]\n";
+		String s = "\t\t{"+x+","+y+"}  [weight: "+weight+"]-["+direction+"]\n";
 		return s;
 	}
 

@@ -20,7 +20,7 @@ public class BreathFirstSearch {
 			queue.remove(0);
 			
 			if(v.getId() == id.intValue()){
-				v.setVisted(true);
+				v.setVisited(true);
 				return v;
 			}
 			
@@ -28,12 +28,12 @@ public class BreathFirstSearch {
 			for(Edge edge:edgeList){
 				Vertex x = graph.getGraph().get(edge.getX());
 				Vertex y = graph.getGraph().get(edge.getY());
-				if(x.isVisted() == false){
-					x.setVisted(true);
+				if(x.isVisited() == false){
+					x.setVisited(true);
 					queue.add(x);
 				}
-				if(y.isVisted() == false){
-					y.setVisted(true);
+				if(y.isVisited() == false){
+					y.setVisited(true);
 					queue.add(y);
 				}
 			}

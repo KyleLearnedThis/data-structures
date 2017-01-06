@@ -6,7 +6,6 @@ import com.albion.common.graph.core.Vertex;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 public class Dijkstra {
@@ -16,12 +15,12 @@ public class Dijkstra {
         this.graph = g;
     }
 
-    public ArrayList<Edge> findShortestDistance(Integer targetId) {
-        initializeWeight();
+    public ArrayList<Vertex> findShortestDistance(Integer targetId) {
+        initializeCost();
 
         return null;
 //        Vertex[] vertices = g.getVertexArray();
-//        int[][] Weight = initializeWeight(vertices, edges);
+//        int[][] Weight = initializeCost(vertices, edges);
 //        int[] D = new int[vertices.length];
 //        Vertex[] P = new Vertex[vertices.length];
 //        ArrayList<Vertex> C = new ArrayList<>();
@@ -148,13 +147,10 @@ public class Dijkstra {
 		return Weight;
 	}
 
-    private void initializeWeight(){
+    private void initializeCost(){
 	    for(Map.Entry<Integer, Vertex> entry : graph.getGraph().entrySet()){
 	        Vertex v = entry.getValue();
-	        List<Edge> edgeList = v.getEdgeList();
-            for(Edge edge : edgeList) {
-                edge.setWeight(Integer.MAX_VALUE);
-            }
+			v.setCost(Integer.MAX_VALUE);
         }
     }
 }

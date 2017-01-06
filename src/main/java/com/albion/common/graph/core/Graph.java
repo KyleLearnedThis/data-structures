@@ -44,6 +44,7 @@ public class Graph{
 							throw new IllegalArgumentException("root was already set once.");
 						}
 						else{
+						    vertex.setRoot(true);
 							setRoot(vertex);
 						}
 					}
@@ -112,7 +113,6 @@ public class Graph{
 
 	public String toString(){
 		StringBuffer s = new StringBuffer();
-		s.append("[Root]-["+root.getId()+"]\n");
 		for(Map.Entry<Integer, Vertex> entry:graph.entrySet()){
 			Vertex v = entry.getValue();
 			s.append(v.toString());

@@ -1,11 +1,11 @@
 package com.albion.common.search.graph;
 
-import java.util.List;
-import java.util.Stack;
-
 import com.albion.common.graph.core.Edge;
 import com.albion.common.graph.core.Graph;
 import com.albion.common.graph.core.Vertex;
+
+import java.util.List;
+import java.util.Stack;
 
 public class DepthFirstSearch {
 	public static Vertex locate(Graph graph, Integer id){
@@ -13,7 +13,7 @@ public class DepthFirstSearch {
 		Vertex root = graph.getRoot();
 
 		stack.add(root);
-		root.setVisted(true);
+		root.setVisited(true);
 
 		while(!stack.isEmpty()) {			
 			List<Edge> list = stack.pop().getEdgeList();
@@ -28,9 +28,9 @@ public class DepthFirstSearch {
 					return v;
 				}
 
-				if(!v.isVisted()) {
+				if(!v.isVisited()) {
 					stack.add(v);
-					v.setVisted(true);		
+					v.setVisited(true);
 				}
 			}
 		}
