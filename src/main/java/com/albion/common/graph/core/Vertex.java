@@ -9,6 +9,7 @@ public class Vertex {
 	private List<Edge> edgeList;
 	private boolean isVisited;
 	private int cost;
+	public Vertex previous;
 
 	public Vertex(int aId, List<Edge> aList){
 		initialize(aId, aList);
