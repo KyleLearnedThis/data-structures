@@ -9,17 +9,16 @@ import java.util.List;
 
 public class BreathFirstSearch {
 
-	public static Vertex locate(Graph graph, Integer id){
-		List<Vertex> queue = new ArrayList<Vertex>();
-		Vertex root = graph.getRoot();
-		
+	public static Vertex locate(Graph graph, Integer source, Integer target){
+		List<Vertex> queue = new ArrayList<>();
+		Vertex root = graph.getVertex(source);
 		queue.add(root);
 		
 		while(!queue.isEmpty()){
 			Vertex v = queue.get(0);
 			queue.remove(0);
 			
-			if(v.getId() == id.intValue()){
+			if(v.getId() == target.intValue()){
 				v.setVisited(true);
 				return v;
 			}

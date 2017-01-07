@@ -43,8 +43,12 @@ public class LevelOrderTraversal <T extends Comparable<?>> implements Traversal{
             int levelNum = queue.size();
             List<T> subList = new LinkedList<>();
             for(int i=0; i<levelNum; i++) {
-                if(queue.peek().left != null) queue.offer(queue.peek().left);
-                if(queue.peek().right != null) queue.offer(queue.peek().right);
+                if(queue.peek().left != null) {
+                    queue.offer(queue.peek().left);
+                }
+                if(queue.peek().right != null) {
+                    queue.offer(queue.peek().right);
+                }
                 subList.add(queue.poll().value);
             }
             wrapList.add(subList);
