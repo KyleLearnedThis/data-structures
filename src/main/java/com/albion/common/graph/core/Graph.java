@@ -17,7 +17,6 @@ import java.util.Map;
  */
 public class Graph{
 	private HashMap<Integer, Vertex> verticesMap;
-	private Vertex root = null;
 
 	public Graph(String filePath){
 		setVerticesMap(new HashMap<>());
@@ -35,19 +34,8 @@ public class Graph{
 				Node nNode = vertexList.item(i);
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 					Element elem = (Element) nNode;
-
 					int vertexId = Integer.parseInt(elem.getAttribute("id"));
 					Vertex vertex = new Vertex(vertexId);
-					String isRootString = elem.getAttribute("root");
-					if(!"".equals(isRootString)&&isRootString.equals("true")){
-						if(getRoot()!=null){
-							throw new IllegalArgumentException("root was already set once.");
-						}
-						else{
-							setRoot(vertex);
-						}
-					}
-
 					NodeList edgeList = elem.getElementsByTagName("edge");
 					addEdgesToAVertex(vertex, edgeList);
 					getVerticesMap().put(new Integer(vertexId), vertex);
@@ -102,14 +90,6 @@ public class Graph{
 		this.verticesMap = verticesMap;
 	}
 
-	public Vertex getRoot() {
-		return root;
-	}
-
-	public void setRoot(Vertex root) {
-		this.root = root;
-	}
-
 	public String toString(){
 		StringBuffer s = new StringBuffer();
 		for(Map.Entry<Integer, Vertex> entry: verticesMap.entrySet()){
@@ -117,17 +97,5 @@ public class Graph{
 			s.append(v.toString());
 		}
 		return s.toString();
-	}
-
-	public Vertex[] getVertexArray() {
-		int size = verticesMap.size();
-		Vertex[] v = new Vertex[size];
-		int index = 0;
-		for(Map.Entry<Integer, Vertex> entry : verticesMap.entrySet()) {
-			Vertex value = entry.getValue();
-			v[index] = value;
-			index++;
-		}
-		return v;
 	}
 }
