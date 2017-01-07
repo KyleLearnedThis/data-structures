@@ -10,7 +10,7 @@ public class DepthFirstSearchTest {
     public void testLocate() throws Exception {
         String filePath2 = "src/test/resources/graph01.xml";
         Graph g = new Graph(filePath2);
-        System.out.println("HEY: "+g.toString());
+        System.out.println(g.toString());
         Vertex v = DepthFirstSearch.locate(g, 1, 4);
         Assert.assertNotNull(v);
         Assert.assertEquals(v.getId(), 4);
