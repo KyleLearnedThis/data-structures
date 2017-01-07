@@ -69,14 +69,14 @@ public class Dijkstra {
 		return null;
 	}
 
-    private void initializeCost(int source){
-	    for(Map.Entry<Integer, Vertex> entry : graph.getVerticesMap().entrySet()){
-	        Vertex v = entry.getValue();
-	        if(v.getId() == source) {
-	        	v.setCost(0);
+	private void initializeCost(int source){
+		for(Map.Entry<Integer, Vertex> entry : graph.getVerticesMap().entrySet()){
+			Vertex v = entry.getValue();
+			if(v.getId() == source) {
+				v.setCost(0);
 			} else {
 				v.setCost(Integer.MAX_VALUE);
 			}
-        }
+		}
     }
 }
