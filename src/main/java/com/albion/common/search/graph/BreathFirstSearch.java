@@ -1,11 +1,11 @@
 package com.albion.common.search.graph;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.albion.common.graph.core.Edge;
 import com.albion.common.graph.core.Graph;
 import com.albion.common.graph.core.Vertex;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BreathFirstSearch {
 
@@ -20,20 +20,20 @@ public class BreathFirstSearch {
 			queue.remove(0);
 			
 			if(v.getId() == id.intValue()){
-				v.setVisted(true);
+				v.setVisited(true);
 				return v;
 			}
 			
 			List<Edge> edgeList = v.getEdgeList();
 			for(Edge edge:edgeList){
-				Vertex x = graph.getGraph().get(edge.getX());
-				Vertex y = graph.getGraph().get(edge.getY());
-				if(x.isVisted() == false){
-					x.setVisted(true);
+				Vertex x = graph.getVerticesMap().get(edge.getX());
+				Vertex y = graph.getVerticesMap().get(edge.getY());
+				if(x.isVisited() == false){
+					x.setVisited(true);
 					queue.add(x);
 				}
-				if(y.isVisted() == false){
-					y.setVisted(true);
+				if(y.isVisited() == false){
+					y.setVisited(true);
 					queue.add(y);
 				}
 			}
