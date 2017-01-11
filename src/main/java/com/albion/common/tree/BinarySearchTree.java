@@ -1,6 +1,6 @@
 package com.albion.common.tree;
 
-public class BinaryTree {
+public class BinarySearchTree {
 	protected TreeNode<Integer> root;
 	public TreeNode<Integer> getRoot() {
 		return root;
@@ -10,7 +10,7 @@ public class BinaryTree {
 		this.root = root;
 	}
 
-	public BinaryTree(){
+	public BinarySearchTree(){
 		root = null;
 	}
 
@@ -92,6 +92,19 @@ public class BinaryTree {
 		}
 	}
 
+	public boolean isValidBST(TreeNode<Integer> root) {
+		return isValidBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+	}
 
+	public boolean isValidBST(TreeNode<Integer> p, Integer min, Integer max) {
+		if (p == null) {
+			return true;
+		}
+
+		if (p.value <= min || p.value >= max){
+			return false;
+		}
+		return isValidBST(p.left, min, p.value) && isValidBST(p.right, p.value, max);
+	}
 
 }
