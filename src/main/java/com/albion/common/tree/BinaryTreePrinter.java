@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class BinaryTreePrinter<T extends Comparable> {
+public class BinaryTreePrinter {
 
     public static <T extends Comparable<?>> void printNode(TreeNode<T> root) {
         int maxLevel = BinaryTreePrinter.maxLevel(root);

@@ -10,7 +10,7 @@ public class BinaryTreeInversionTest {
     @Test
     public void testInvert() throws Exception {
         Integer[] array = {15, 6, 18, 3, 7, 17, 20, 2, 4, 13, 9};
-        BinarySearchTree bt = new BinarySearchTree();
+        BinarySearchTree<Integer> bt = new BinarySearchTree<>();
 
         for(Integer x : array) {
             bt.insert(x);

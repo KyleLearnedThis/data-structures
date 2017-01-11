@@ -145,7 +145,7 @@ public class BinarySearchTreeTest {
 	@Test
 	public void testValidBST() {
 		Integer[] array = {15, 6, 18, 3, 7, 17, 20, 2, 4, 13, 9};
-		BinarySearchTree bt = new BinarySearchTree();
+		BinarySearchTree<Integer> bt = new BinarySearchTree();
 
 		for(Integer x : array) {
 			bt.insert(x);
@@ -154,7 +154,7 @@ public class BinarySearchTreeTest {
 		TreeNode<Integer> root = bt.getRoot();
 		BinaryTreePrinter.printNode(root);
 
-		boolean actual = bt.isValidBST(root);
+		boolean actual = bt.isValidBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
 		Assert.assertEquals(actual, true);
 	}
 }

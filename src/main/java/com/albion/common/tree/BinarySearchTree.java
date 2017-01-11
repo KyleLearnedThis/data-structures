@@ -1,12 +1,12 @@
 package com.albion.common.tree;
 
-public class BinarySearchTree {
-	protected TreeNode<Integer> root;
-	public TreeNode<Integer> getRoot() {
+public class BinarySearchTree<T extends Comparable<T>> {
+	protected TreeNode<T> root;
+	public TreeNode<T> getRoot() {
 		return root;
 	}
 
-	public void setRoot(TreeNode<Integer> root) {
+	public void setRoot(TreeNode<T> root) {
 		this.root = root;
 	}
 
@@ -14,42 +14,42 @@ public class BinarySearchTree {
 		root = null;
 	}
 
-	public void insert(Integer data){
+	public void insert(T data){
 		if (root == null) {
-			root = new TreeNode<>(data, null, null, null);
+			root = new TreeNode<T>(data, null, null, null);
 		}else{
 			internalInsert(root, data);
 		}
 	}
 
-	private static void internalInsert(TreeNode<Integer> node, int data){
+	private void internalInsert(TreeNode<T> node, T data){
 		// Not the same value twice
+		T val = node.getValue();
 		if (data == node.getValue()) {
 			return;
-		} else if (data < node.getValue()) {
+		} else if (data.compareTo(val) == -1) {
 			if (node.getLeft() == null) {
-				node.setLeft(new TreeNode<Integer>(data, node, null, null));
-			}else{
+				node.setLeft(new TreeNode<>(data, node, null, null));
+			} else {
 				internalInsert(node.getLeft(), data);
 			}
-		}else{
+		} else {
 			if (node.getRight() == null) {
-				node.setRight(new TreeNode<Integer>(data, node, null, null));
-			}else{
+				node.setRight(new TreeNode<>(data, node, null, null));
+			} else {
 				internalInsert(node.getRight(), data);
 			}       
 		}
 	}
 
-	public TreeNode<Integer> find(Integer seek){
-
-		TreeNode<Integer> cur = root;
+	public TreeNode<T> find(T seek){
+		TreeNode<T> cur = root;
 
 		while(cur!=null){
-			if(seek.intValue() == cur.getValue().intValue()){
+			if(seek.compareTo(cur.value) == -1){
 				return cur;
 			}
-			else if( seek.intValue() > cur.getValue().intValue()){
+			else if(seek.compareTo(cur.value) == 1){
 				cur = cur.getRight();
 			}
 			else{
@@ -60,12 +60,12 @@ public class BinarySearchTree {
 		return null;
 	}
 
-	public void delete(Integer value){
-		TreeNode<Integer> node = this.find(value);
+	public void delete(T value){
+		TreeNode<T> node = this.find(value);
 		if(node == null)
 			return;
 		
-		TreeNode<Integer> temp, parent = null;
+		TreeNode<T> temp, parent;
 		if(node.getLeft() == null && node.getRight() == null){
 			node = null;
 		}
@@ -79,29 +79,23 @@ public class BinarySearchTree {
 				temp = node.getLeft();
 				parent.setRight(temp);
 			}
-
-
 		}
 		else{
 			//Lazy, replace value only
 			temp = node.getRight().minNode();
 			System.out.println("WHO WHO 1:" + temp.getValue().toString());
 			
-			TreeNode<Integer> tempParent = temp.getParent();
+			TreeNode<T> tempParent = temp.getParent();
 			System.out.println("WHO WHO 2:" + tempParent.getValue().toString());
 		}
 	}
 
-	public boolean isValidBST(TreeNode<Integer> root) {
-		return isValidBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
-	}
 
-	public boolean isValidBST(TreeNode<Integer> p, Integer min, Integer max) {
+	public boolean isValidBST(TreeNode<T> p, T min, T max) {
 		if (p == null) {
 			return true;
 		}
-
-		if (p.value <= min || p.value >= max){
+		if (p.value.compareTo(min) <= 0 || p.value.compareTo(max) >= 0){
 			return false;
 		}
 		return isValidBST(p.left, min, p.value) && isValidBST(p.right, p.value, max);
