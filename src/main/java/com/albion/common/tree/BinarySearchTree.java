@@ -14,6 +14,10 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		root = null;
 	}
 
+	public BinarySearchTree(TreeNode<T> root) {
+		this.root = root;
+	}
+
 	public void insert(T data){
 		if (root == null) {
 			root = new TreeNode<T>(data, null, null, null);
@@ -24,7 +28,12 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
 	private void internalInsert(TreeNode<T> node, T data){
 		// Not the same value twice
+		if(this.find(data) != null) {
+			return;
+		}
+
 		T val = node.getValue();
+
 		if (data == node.getValue()) {
 			return;
 		} else if (data.compareTo(val) == -1) {
@@ -46,7 +55,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		TreeNode<T> cur = root;
 
 		while(cur!=null){
-			if(seek.compareTo(cur.value) == -1){
+			if(seek.compareTo(cur.value) == 0){
 				return cur;
 			}
 			else if(seek.compareTo(cur.value) == 1){
@@ -60,36 +69,21 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		return null;
 	}
 
-	public void delete(T value){
-		TreeNode<T> node = this.find(value);
-		if(node == null)
-			return;
-		
-		TreeNode<T> temp, parent;
-		if(node.getLeft() == null && node.getRight() == null){
-			node = null;
-		}
-		else if(node.getLeft() == null || node.getRight() == null){
-			parent = node.getParent();
-			if(node.getLeft() == null){
-				temp = node.getRight();
-				parent.setLeft(temp);
-			}
-			else{
-				temp = node.getLeft();
-				parent.setRight(temp);
-			}
-		}
-		else{
-			//Lazy, replace value only
-			temp = node.getRight().minNode();
-			System.out.println("WHO WHO 1:" + temp.getValue().toString());
-			
-			TreeNode<T> tempParent = temp.getParent();
-			System.out.println("WHO WHO 2:" + tempParent.getValue().toString());
-		}
+	public TreeNode<T> findParent(T val) {
+		return findParent(val, root, null);
 	}
 
+	public TreeNode<T> findParent(T val, TreeNode<T> node, TreeNode<T> parent) {
+		if (node == null) {
+			return null;
+		} else if (!node.getValue().equals(val)) {
+			parent = findParent(val, node.getLeft(), node);
+			if (parent == null) {
+				parent = findParent(val, node.getRight(), node);
+			}
+		}
+		return parent;
+	}
 
 	public boolean isValidBST(TreeNode<T> p, T min, T max) {
 		if (p == null) {

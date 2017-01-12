@@ -81,7 +81,6 @@ public class BinarySearchTreeTest {
 	        n13.parent = n07;
 
 	        n09.parent = n13;
-
 	        Object[][] retVal = new Object[][] {{root}};
 	        return retVal;
 	}
