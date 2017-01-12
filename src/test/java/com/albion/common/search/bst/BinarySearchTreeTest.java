@@ -81,7 +81,6 @@ public class BinarySearchTreeTest {
 	        n13.parent = n07;
 
 	        n09.parent = n13;
-
 	        Object[][] retVal = new Object[][] {{root}};
 	        return retVal;
 	}
@@ -156,5 +155,14 @@ public class BinarySearchTreeTest {
 
 		boolean actual = bt.isValidBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
 		Assert.assertEquals(actual, true);
+	}
+
+	@Test(dataProvider = "d02")
+	public void testDelete(TreeNode<Integer> root) {
+		BinaryTreePrinter.printNode(root);
+		BinarySearchTree<Integer> bt = new BinarySearchTree<>(root);
+		System.out.println("======== AFTER ========");
+		bt.delete(9);
+		BinaryTreePrinter.printNode(root);
 	}
 }
