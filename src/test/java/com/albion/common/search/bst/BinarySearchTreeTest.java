@@ -157,12 +157,25 @@ public class BinarySearchTreeTest {
 		Assert.assertEquals(actual, true);
 	}
 
+	//No Child
 	@Test(dataProvider = "d02")
-	public void testDelete(TreeNode<Integer> root) {
+	public void testDeleteV1(TreeNode<Integer> root) {
 		BinaryTreePrinter.printNode(root);
 		BinarySearchTree<Integer> bt = new BinarySearchTree<>(root);
 		System.out.println("======== AFTER ========");
-		bt.delete(9);
+		Integer x = new Integer(9);
+		bt.deleteNode(root, x);
+		BinaryTreePrinter.printNode(root);
+	}
+
+	//Two children
+	@Test(dataProvider = "d02")
+	public void testDeleteV2(TreeNode<Integer> root) {
+		BinaryTreePrinter.printNode(root);
+		BinarySearchTree<Integer> bt = new BinarySearchTree<>(root);
+		System.out.println("======== AFTER ========");
+		Integer x = new Integer(6);
+		bt.deleteNode(root, x);
 		BinaryTreePrinter.printNode(root);
 	}
 }

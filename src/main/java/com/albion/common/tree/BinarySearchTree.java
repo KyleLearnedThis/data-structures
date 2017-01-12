@@ -69,6 +69,34 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		return null;
 	}
 
+	public TreeNode<T> inOrderSuccessor(TreeNode start, TreeNode p) {
+		if(start==null)
+			return null;
+
+		TreeNode next = null;
+		TreeNode c = start;
+
+		while(c!=null && c.getValue() != p.getValue()){
+			if(c.getValue().compareTo(p.getValue()) == 1){
+				next = c;
+				c = c.getLeft();
+			}else{
+				c= c.getRight();
+			}
+		}
+
+		if(c==null) {
+			return null;
+		}
+		if(c.right==null) {
+			return next;
+		}
+		c = c.right;
+		while(c.left!=null) {
+			c = c.left;
+		}
+		return c;
+	}
 
 	public TreeNode<T> findParent(T val) {
 		return findParent(val, root, null);
@@ -86,39 +114,94 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		return parent;
 	}
 
-	//TODO: assume no parent member existed
-	public void delete(T value){
-		TreeNode<T> node = this.find(value);
-		if(node == null) {
-			return;
-		}
-		TreeNode<T> parent = this.findParent(value);
-		TreeNode<T> temp;
-
-		if(node.getLeft() == null && node.getRight() == null){
-			parent = null;
-		}
-		else if(node.getLeft() == null || node.getRight() == null){
-			parent = node.getParent();
-			if(node.getLeft() == null){
-				temp = node.getRight();
-				parent.setLeft(temp);
-			}
-			else{
-				temp = node.getLeft();
-				parent.setRight(temp);
-			}
-		}
-		else{
-			//Lazy, replace value only
-			temp = node.getRight().minNode();
-			System.out.println("WHO WHO 1:" + temp.getValue().toString());
-			
-			TreeNode<T> tempParent = temp.getParent();
-			System.out.println("WHO WHO 2:" + tempParent.getValue().toString());
-		}
+//	public BinaryNode findMin( BinaryNode t )
+	public  TreeNode<T> findMin(TreeNode<T> start) {
+		if( start == null )
+			return null;
+		else if( start.left == null )
+			return start;
+		return findMin( start.left );
 	}
 
+//	private BinaryNode remove( Comparable x, BinaryNode t )
+//	{
+//		if( t == null )
+//			return t;   // Item not found; do nothing
+//		if( x.compareTo( t.getValue() ) < 0 )
+//			t.left = remove( x, t.left );
+//		else if( x.compareTo( t.getValue() ) > 0 )
+//			t.right = remove( x, t.right );
+//		else if( t.left != null && t.right != null ) // Two children
+//		{
+//			t.getValue() = findMin( t.right ).element;
+//			t.right = remove( t.getValue(), t.right );
+//		}
+//		else
+//			t = ( t.left != null ) ? t.left : t.right;
+//		return t;
+//	}
+
+	public TreeNode<T> deleteNode(TreeNode<T> t, T x) {
+		if( t == null )
+			return t;   // Item not found; do nothing
+		if( x.compareTo( t.getValue() ) < 0 )
+			t.left = deleteNode(t.left, x );
+		else if( x.compareTo( t.getValue() ) > 0 )
+			t.right = deleteNode(t.right,x );
+		else if( t.left != null && t.right != null ) // Two children
+		{
+			t.value = findMin( t.right ).getValue();
+			t.right = deleteNode(t.right,t.value );
+		}
+		else
+			t = ( t.left != null ) ? t.left : t.right;
+		return t;
+	}
+
+
+//	// Get minimum element in binary search tree
+//	public TreeNode<T> inOrderSuccessor(TreeNode<T> root) {
+//		if (root.left == null)
+//			return root;
+//		else {
+//			return inOrderSuccessor(root.left);
+//		}
+//	}
+
+//	public TreeNode<T> deleteNode(TreeNode<T> start, T value) {
+//		if (start == null) {
+//			return null;
+//		}
+//
+//		if (start.getValue().compareTo(value) == 1) {
+//			start.left = deleteNode(start.left, value);
+//		} else if (start.getValue().compareTo(value) == -1) {
+//			start.right = deleteNode(start.right, value);
+//
+//		} else {
+//			// if nodeToBeDeleted have both children
+//			if (start.left != null && start.right != null) {
+//				TreeNode<T> temp = start;
+//				// Finding minimum element from right
+//				TreeNode<T> minNodeForRight = findMin(temp.right);
+//				// Replacing current node with minimum node from right subtree
+//				// Deleting minimum node from right now
+//				deleteNode(start.right, minNodeForRight.getValue());
+//			}
+//			// if nodeToBeDeleted has only left child
+//			else if (start.left != null) {
+//				start = start.left;
+//			}
+//			// if nodeToBeDeleted has only right child
+//			else if (start.right != null) {
+//				start = start.right;
+//			}
+//			// if nodeToBeDeleted do not have child (Leaf node)
+//			else
+//				start = null;
+//		}
+//		return start;
+//	}
 
 	public boolean isValidBST(TreeNode<T> p, T min, T max) {
 		if (p == null) {
