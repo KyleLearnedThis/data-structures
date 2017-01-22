@@ -3,42 +3,42 @@ package com.albion.common.graph.core.v2;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Vertex {
+public class Vertex<T> {
 
-    private String id;
-    private List<Edge> edgeList;
+    private T id;
+    private List<Edge<T>> edgeList;
     private boolean isVisited;
     private int cost;
-    public Vertex previous;
+    public Vertex<T> previous;
 
-    public Vertex(String aId, List<Edge> aList){
+    public Vertex(T aId, List<Edge<T>> aList){
         initialize(aId, aList);
     }
 
-    private void initialize(String aid, List<Edge> edgeList){
+    private void initialize(T aid, List<Edge<T>> edgeList){
         this.id = aid;
         isVisited = false;
         cost = 0;
         this.edgeList = edgeList;
     }
 
-    public Vertex(String aId){
+    public Vertex(T aId){
         initialize(aId, new ArrayList<>());
     }
 
-    public Vertex(String aId, boolean isRoot){
+    public Vertex(T aId, boolean isRoot){
         initialize(aId, new ArrayList<>());
     }
 
-    public String getId() {
+    public T getId() {
         return id;
     }
 
-    public List<Edge> getEdgeList() {
+    public List<Edge<T>> getEdgeList() {
         return edgeList;
     }
 
-    public void setEdgeList(List<Edge> edgeList) {
+    public void setEdgeList(List<Edge<T>> edgeList) {
         this.edgeList = edgeList;
     }
     public boolean isVisited() {

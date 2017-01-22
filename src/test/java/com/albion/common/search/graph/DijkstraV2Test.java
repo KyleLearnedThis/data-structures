@@ -16,11 +16,14 @@ public class DijkstraV2Test {
                 {"src/test/resources/graph04.xml", "San Francisco", "Chicago", 13}
         };
     }
+
     @Test(dataProvider = "dp01")
     public void testFindShortestPath(String filePath, String src, String destination, int expectedCost) throws Exception {
-        Graph g = new Graph(filePath);
+        Graph<String> g = new Graph<>();
         DijkstraV2 dijkstra = new DijkstraV2(g);
-        List<Vertex> result = dijkstra.findShortestDistance(src, destination);
+        dijkstra.parseInputIDAsString(filePath);
+
+        List<Vertex<String>> result = dijkstra.findShortestDistance(src, destination);
         System.out.println("============");
         System.out.println(g.toString());
 
