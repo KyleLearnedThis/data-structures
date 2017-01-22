@@ -2,35 +2,42 @@ package com.albion.common.search.graph;
 
 import com.albion.common.graph.core.v2.Edge;
 import com.albion.common.graph.core.v2.Graph;
+import com.albion.common.graph.core.v2.GraphUtility;
 import com.albion.common.graph.core.v2.Vertex;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class DijkstraV2 {
-    private Graph graph;
+    private Graph<String> graph;
 
-    public DijkstraV2(Graph g) {
+    public void parseInputIDAsString(String filePath) {
+        HashMap<String, Vertex<String>> map = GraphUtility.parseInputIDString(filePath);
+        graph.setVerticesMap(map);
+    }
+
+    public DijkstraV2(Graph<String> g) {
         this.graph = g;
     }
 
-    public List<Vertex> findShortestDistance(String source, String target) {
+    public List<Vertex<String>> findShortestDistance(String source, String target) {
         initialize(source);
-        List<Vertex> queue = new ArrayList<>();
-        for(Map.Entry<String, Vertex> entry : 	graph.getVerticesMap().entrySet()) {
-            Vertex v = entry.getValue();
+        List<Vertex<String>> queue = new ArrayList<>();
+        for(Map.Entry<String, Vertex<String>> entry : 	graph.getVerticesMap().entrySet()) {
+            Vertex<String> v = entry.getValue();
             queue.add(v);
         }
 
         while(!queue.isEmpty()){
-            Vertex u = poll(queue);
+            Vertex<String> u = poll(queue);
             int cost = u.getCost();
             // String uid = u.getId();
             // System.out.println("===== uid: " + uid + " cost: "+ cost);
-            List<Edge> edgeList = u.getEdgeList();
+            List<Edge<String>> edgeList = u.getEdgeList();
 
-            for(Edge edge : edgeList) {
+            for(Edge<String> edge : edgeList) {
                 String id = edge.getY();
                 int weight = edge.getWeight();
                 int alt = cost + weight;
@@ -43,8 +50,8 @@ public class DijkstraV2 {
             }
         }
 
-        List<Vertex> result = new ArrayList<>();
-        Vertex x = graph.getVerticesMap().get(target);
+        List<Vertex<String>> result = new ArrayList<>();
+        Vertex<String> x = graph.getVerticesMap().get(target);
         do{
             result.add(0, x);
             // System.out.println("===== id: " + x.getId() + " cost: " + x.getCost() + " =====");
@@ -53,7 +60,7 @@ public class DijkstraV2 {
         return result;
     }
 
-    private Vertex poll(List<Vertex> list) {
+    private Vertex<String> poll(List<Vertex<String>> list) {
         int smallest = Integer.MAX_VALUE;
         for(int i = 0; i < list.size(); i++){
             int curCost = list.get(i).getCost();
@@ -62,7 +69,7 @@ public class DijkstraV2 {
             }
         }
         for(int i = 0; i < list.size(); i++) {
-            Vertex v = list.get(i);
+            Vertex<String> v = list.get(i);
             if(v.getCost() == smallest){
                 list.remove(i);
                 return v;
@@ -72,8 +79,8 @@ public class DijkstraV2 {
     }
 
     private void initialize(String source){
-        for(Map.Entry<String, Vertex> entry : graph.getVerticesMap().entrySet()){
-            Vertex v = entry.getValue();
+        for(Map.Entry<String, Vertex<String>> entry : graph.getVerticesMap().entrySet()){
+            Vertex<String> v = entry.getValue();
             if(v.getId().equals(source)) {
                 v.setCost(0);
             } else {

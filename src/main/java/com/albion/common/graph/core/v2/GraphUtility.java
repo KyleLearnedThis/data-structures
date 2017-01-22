@@ -1,4 +1,4 @@
-package com.albion.common.graph.core.v3;
+package com.albion.common.graph.core.v2;
 
 import com.albion.common.graph.core.Directions;
 import com.albion.common.utils.XPathTask;
