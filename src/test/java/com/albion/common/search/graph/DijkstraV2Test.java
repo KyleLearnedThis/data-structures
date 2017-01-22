@@ -37,5 +37,4 @@ public class DijkstraV2Test {
         Vertex target = result.get(result.size() - 1);
         Assert.assertEquals(target.getCost(), expectedCost);
     }
-
 }
