@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<verticesMap>
+    <vertices>
+	    <vertex id="San Francisco">
+	        <edge id="New York" weight="8" direction="BOTH" />
+	        <edge id="Los Angeles" weight="7" direction="BOTH" />
+			<edge id="Boston" weight="15" direction="BOTH" />
+	    </vertex>
+	    <vertex id="New York" >
+	        <edge id="San Francisco" weight="8" direction="BOTH" />
+	        <edge id="Chicago" weight="12" direction="BOTH" />
+	    </vertex>
+	    <vertex id="Los Angeles" >
+	        <edge id="San Francisco" weight="7" direction="BOTH" />
+	        <edge id="Miami" weight="4" direction="BOTH" />
+	    </vertex>
+	    <vertex id="Boston" >
+	        <edge id="San Francisco" weight="15" direction="BOTH" />
+	        <edge id="Los Angeles" weight="10" direction="BOTH" />
+	    </vertex>
+		<vertex id="Chicago" >
+			<edge id="New York" weight="12" direction="BOTH" />
+			<edge id="Miami" weight="2" direction="BOTH" />
+		</vertex>
+		<vertex id="Miami" >
+			<edge id="Los Angeles" weight="4" direction="BOTH" />
+			<edge id="Chicago" weight="2" direction="BOTH" />
+		</vertex>
+    </vertices>
+</verticesMap>

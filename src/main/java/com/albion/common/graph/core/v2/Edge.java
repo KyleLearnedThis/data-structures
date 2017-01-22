@@ -1,22 +1,22 @@
-package com.albion.common.graph.core;
+package com.albion.common.graph.core.v2;
 
 
+import com.albion.common.graph.core.Directions;
 
 public class Edge {
-
-	private int x;
-	private int y;
+	private String x;
+	private String y;
 	private Directions direction;     // A_TO_B, B_TO_A or BOTH
 	private int weight;
 
-	public Edge(int a, int b) {
+	public Edge(String a, String b) {
 		setX(a);
 		setY(b);
 		setDirection(Directions.BOTH);
 		weight = -1;
 	}
 
-	public Edge(int a, int b, Directions way, int aWeight){
+	public Edge(String a, String b, Directions way, int aWeight){
 		setX(a);
 		setY(b);
 		setDirection(way);
@@ -29,16 +29,16 @@ public class Edge {
 	public void setWeight(int weight) {
 		this.weight = weight;
 	}
-	public int getX() {
+	public String getX() {
 		return x;
 	}
-	public void setX(int x) {
+	public void setX(String x) {
 		this.x = x;
 	}
-	public int getY() {
+	public String getY() {
 		return y;
 	}
-	public void setY(int y) {
+	public void setY(String y) {
 		this.y = y;
 	}
 	public Directions getDirection() {
@@ -48,7 +48,7 @@ public class Edge {
 		this.direction = direction;
 	}
 	public String toString(){
-		String s = "\t\t{"+x+","+y+"}  [weight: "+weight+"]-["+direction+"]\n";
+		String s = "\t\t{"+x+", "+y+"}  [weight: "+weight+"]-["+direction+"]\n";
 		return s;
 	}
 

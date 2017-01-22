@@ -1,5 +1,6 @@
-package com.albion.common.graph.core;
+package com.albion.common.graph.core.v1;
 
+import com.albion.common.graph.core.Directions;
 import com.albion.common.utils.XPathTask;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

@@ -1,22 +1,24 @@
 package com.albion.common.search.graph;
 
-import com.albion.common.graph.core.v1.Edge;
-import com.albion.common.graph.core.v1.Graph;
-import com.albion.common.graph.core.v1.Vertex;
+import com.albion.common.graph.core.v2.Edge;
+import com.albion.common.graph.core.v2.Graph;
+import com.albion.common.graph.core.v2.Vertex;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
-public class Dijkstra {
+public class DijkstraV2 {
     private Graph graph;
 
-    public Dijkstra(Graph g) {
+    public DijkstraV2(Graph g) {
 		this.graph = g;
     }
 
-    public List<Vertex> findShortestDistance(int source, int target) {
+    public List<Vertex> findShortestDistance(String source, String target) {
         initializeCost(source);
 		List<Vertex> queue = new ArrayList<>();
-		for(Map.Entry<Integer, Vertex> entry : 	graph.getVerticesMap().entrySet()) {
+		for(Map.Entry<String, Vertex> entry : 	graph.getVerticesMap().entrySet()) {
 			Vertex v = entry.getValue();
 			queue.add(v);
 		}
@@ -24,12 +26,12 @@ public class Dijkstra {
 		while(!queue.isEmpty()){
 			Vertex u = poll(queue);
 			int cost = u.getCost();
-			// int uid = u.getId();
+			// String uid = u.getId();
 			// System.out.println("===== uid: " + uid + " cost: "+ cost);
 			List<Edge> edgeList = u.getEdgeList();
 
 			for(Edge edge : edgeList) {
-				int id = edge.getY();
+				String id = edge.getY();
 				int weight = edge.getWeight();
 				int alt = cost + weight;
 				Vertex v = graph.getVertex(id);
@@ -69,10 +71,10 @@ public class Dijkstra {
 		return null;
 	}
 
-	private void initializeCost(int source){
-		for(Map.Entry<Integer, Vertex> entry : graph.getVerticesMap().entrySet()){
+	private void initializeCost(String source){
+		for(Map.Entry<String, Vertex> entry : graph.getVerticesMap().entrySet()){
 			Vertex v = entry.getValue();
-			if(v.getId() == source) {
+			if(v.getId().equals(source)) {
 				v.setCost(0);
 			} else {
 				v.setCost(Integer.MAX_VALUE);

@@ -1,4 +1,4 @@
-package com.albion.common.graph.core;
+package com.albion.common.graph.core.v1;
 
 import java.util.ArrayList;
 import java.util.List;

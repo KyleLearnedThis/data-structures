@@ -1,25 +1,25 @@
 package com.albion.common.search.graph;
 
-import com.albion.common.graph.core.v1.Graph;
-import com.albion.common.graph.core.v1.Vertex;
+import com.albion.common.graph.core.v2.Graph;
+import com.albion.common.graph.core.v2.Vertex;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.*;
+import java.util.List;
 
-public class DijkstraTest {
+public class DijkstraV2Test {
     @DataProvider(name = "dp01")
     public Object[][] makeData() {
         return new Object[][] {
-                {"src/test/resources/graph01.xml", 1, 4, 14},
-                {"src/test/resources/graph02.xml", 1, 5, 13}
+                {"src/test/resources/graph03.xml", "San Francisco", "Boston", 14},
+                {"src/test/resources/graph04.xml", "San Francisco", "Chicago", 13}
         };
     }
     @Test(dataProvider = "dp01")
-    public void testFindShortestPath(String filePath, int src, int destination, int expectedCost) throws Exception {
+    public void testFindShortestPath(String filePath, String src, String destination, int expectedCost) throws Exception {
         Graph g = new Graph(filePath);
-        Dijkstra dijkstra = new Dijkstra(g);
+        DijkstraV2 dijkstra = new DijkstraV2(g);
         List<Vertex> result = dijkstra.findShortestDistance(src, destination);
         System.out.println("============");
         System.out.println(g.toString());
@@ -37,5 +37,4 @@ public class DijkstraTest {
         Vertex target = result.get(result.size() - 1);
         Assert.assertEquals(target.getCost(), expectedCost);
     }
-
 }
