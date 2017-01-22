@@ -24,6 +24,10 @@ public class Graph {
 		parseInput(filePath);	
 	}
 
+	public Graph() {
+        setVerticesMap(new HashMap<>());
+    }
+
 	public void parseInput(String filePath){
 		File inputFile = new File(filePath);
 
