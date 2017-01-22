@@ -10,69 +10,9 @@ import java.util.Map;
 public class Graph<T>{
 	private HashMap<String, Vertex<T>> verticesMap;
 
-//	public Graph(String filePath){
-//		setVerticesMap(new HashMap<>());
-//		parseInputIDAsString(filePath);
-//	}
-
 	public Graph() {
         setVerticesMap(new HashMap<>());
     }
-
-//	public void parseInputIDAsString(String filePath){
-//		File inputFile = new File(filePath);
-//
-//		try {
-//			XPathTask xpt = new XPathTask(inputFile);
-//			NodeList vertexList = xpt.processQuery("//vertices/vertex");
-//
-//			for(int i = 0; i < vertexList.getLength(); i++){
-//				Node nNode = vertexList.item(i);
-//				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-//					Element elem = (Element) nNode;
-//					T vertexId = elem.getAttribute("id");
-//					Vertex vertex = new Vertex(vertexId);
-//					NodeList edgeList = elem.getElementsByTagName("edge");
-//					addEdgesToAVertex(vertex, edgeList);
-//					getVerticesMap().put(vertexId, vertex);
-//				}
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-
-//	public Vertex addEdgesToAVertex(Vertex vertex, NodeList list){
-//		List<Edge> edgeList = new ArrayList<>();
-//		for(int j = 0; j < list.getLength(); j++){
-//			Node mNode = list.item(j);
-//			if (mNode.getNodeType() == Node.ELEMENT_NODE) {
-//				Element elem = (Element) mNode;
-//				String id = elem.getAttribute("id");
-//				String weight = elem.getAttribute("weight");
-//				String direction = elem.getAttribute("direction");
-//
-//				Directions way;
-//				if(!"".equals(direction)){
-//					way = Directions.BOTH;
-//				}else if(direction.equals("A_TO_B")){
-//					way = Directions.A_TO_B;
-//				}else if(direction.equals("B_TO_A")){
-//					way = Directions.B_TO_A;
-//				}else{
-//					way = Directions.BOTH;
-//				}
-//
-//				if("".equals(weight)){
-//					weight = "0";
-//				}
-//				Edge edge = new Edge(vertex.getId(), id, way, Integer.parseInt(weight));
-//				edgeList.add(edge);
-//			}
-//		}
-//		vertex.setEdgeList(edgeList);
-//		return vertex;
-//	}
 
 	public HashMap<String, Vertex<T>> getVerticesMap() {
 		return verticesMap;
