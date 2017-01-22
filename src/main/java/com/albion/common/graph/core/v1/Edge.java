@@ -1,6 +1,7 @@
-package com.albion.common.graph.core;
+package com.albion.common.graph.core.v1;
 
 
+import com.albion.common.graph.core.Directions;
 
 public class Edge {
 

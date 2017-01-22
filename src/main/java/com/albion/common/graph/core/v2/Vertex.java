@@ -3,30 +3,30 @@ package com.albion.common.graph.core.v2;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VertexV2 {
+public class Vertex {
 
     private String id;
-    private List<EdgeV2> edgeList;
+    private List<Edge> edgeList;
     private boolean isVisited;
     private int cost;
-    public VertexV2 previous;
+    public Vertex previous;
 
-    public VertexV2(String aId, List<EdgeV2> aList){
+    public Vertex(String aId, List<Edge> aList){
         initialize(aId, aList);
     }
 
-    private void initialize(String aid, List<EdgeV2> edgeList){
+    private void initialize(String aid, List<Edge> edgeList){
         this.id = aid;
         isVisited = false;
         cost = 0;
         this.edgeList = edgeList;
     }
 
-    public VertexV2(String aId){
+    public Vertex(String aId){
         initialize(aId, new ArrayList<>());
     }
 
-    public VertexV2(String aId, boolean isRoot){
+    public Vertex(String aId, boolean isRoot){
         initialize(aId, new ArrayList<>());
     }
 
@@ -34,11 +34,11 @@ public class VertexV2 {
         return id;
     }
 
-    public List<EdgeV2> getEdgeList() {
+    public List<Edge> getEdgeList() {
         return edgeList;
     }
 
-    public void setEdgeList(List<EdgeV2> edgeList) {
+    public void setEdgeList(List<Edge> edgeList) {
         this.edgeList = edgeList;
     }
     public boolean isVisited() {
@@ -53,7 +53,7 @@ public class VertexV2 {
         s.append("[ID: " + id);
         s.append(" cost: "+ cost+"]\n");
         s.append("\t[EDGES]\n");
-        for(EdgeV2 edge:edgeList){
+        for(Edge edge:edgeList){
             s.append(edge.toString());
         }
         return s.toString();

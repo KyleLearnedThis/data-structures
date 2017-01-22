@@ -1,5 +1,6 @@
-package com.albion.common.graph.core;
+package com.albion.common.graph.core.v2;
 
+import com.albion.common.graph.core.Directions;
 import com.albion.common.utils.XPathTask;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -15,8 +16,8 @@ import java.util.Map;
  * 	private T x; private T y;private W weight;
  * 	private M id; private N data;
  */
-public class Graph{
-	private HashMap<Integer, Vertex> verticesMap;
+public class Graph {
+	private HashMap<String, Vertex> verticesMap;
 
 	public Graph(String filePath){
 		setVerticesMap(new HashMap<>());
@@ -34,11 +35,11 @@ public class Graph{
 				Node nNode = vertexList.item(i);
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 					Element elem = (Element) nNode;
-					int vertexId = Integer.parseInt(elem.getAttribute("id"));
+					String vertexId = elem.getAttribute("id");
 					Vertex vertex = new Vertex(vertexId);
 					NodeList edgeList = elem.getElementsByTagName("edge");
 					addEdgesToAVertex(vertex, edgeList);
-					getVerticesMap().put(new Integer(vertexId), vertex);
+					getVerticesMap().put(vertexId, vertex);
 				}
 			}
 		} catch (Exception e) {
@@ -70,7 +71,7 @@ public class Graph{
 				if("".equals(weight)){
 					weight = "0";
 				}
-				Edge edge = new Edge(vertex.getId(), Integer.parseInt(id), way, Integer.parseInt(weight));
+				Edge edge = new Edge(vertex.getId(), id, way, Integer.parseInt(weight));
 				edgeList.add(edge);
 			}
 		}
@@ -78,21 +79,21 @@ public class Graph{
 		return vertex;
 	}
 
-	public HashMap< Integer, Vertex> getVerticesMap() {
+	public HashMap<String, Vertex> getVerticesMap() {
 		return verticesMap;
 	}
 
-	public Vertex getVertex(int id){
+	public Vertex getVertex(String id){
 		return this.verticesMap.get(id);
 	}
 
-	public void setVerticesMap(HashMap< Integer, Vertex> verticesMap) {
+	public void setVerticesMap(HashMap<String, Vertex> verticesMap) {
 		this.verticesMap = verticesMap;
 	}
 
 	public String toString(){
 		StringBuffer s = new StringBuffer();
-		for(Map.Entry<Integer, Vertex> entry: verticesMap.entrySet()){
+		for(Map.Entry<String, Vertex> entry: verticesMap.entrySet()){
 			Vertex v = entry.getValue();
 			s.append(v.toString());
 		}

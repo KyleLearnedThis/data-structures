@@ -3,20 +3,20 @@ package com.albion.common.graph.core.v2;
 
 import com.albion.common.graph.core.Directions;
 
-public class EdgeV2 {
+public class Edge {
 	private String x;
 	private String y;
 	private Directions direction;     // A_TO_B, B_TO_A or BOTH
 	private int weight;
 
-	public EdgeV2(String a, String b) {
+	public Edge(String a, String b) {
 		setX(a);
 		setY(b);
 		setDirection(Directions.BOTH);
 		weight = -1;
 	}
 
-	public EdgeV2(String a, String b, Directions way, int aWeight){
+	public Edge(String a, String b, Directions way, int aWeight){
 		setX(a);
 		setY(b);
 		setDirection(way);
@@ -48,7 +48,7 @@ public class EdgeV2 {
 		this.direction = direction;
 	}
 	public String toString(){
-		String s = "\t\t{"+x+","+y+"}  [weight: "+weight+"]-["+direction+"]\n";
+		String s = "\t\t{"+x+", "+y+"}  [weight: "+weight+"]-["+direction+"]\n";
 		return s;
 	}
 

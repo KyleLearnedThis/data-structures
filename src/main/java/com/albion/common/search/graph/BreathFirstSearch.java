@@ -1,8 +1,8 @@
 package com.albion.common.search.graph;
 
-import com.albion.common.graph.core.Edge;
-import com.albion.common.graph.core.Graph;
-import com.albion.common.graph.core.Vertex;
+import com.albion.common.graph.core.v1.Edge;
+import com.albion.common.graph.core.v1.Graph;
+import com.albion.common.graph.core.v1.Vertex;
 
 import java.util.ArrayList;
 import java.util.List;
