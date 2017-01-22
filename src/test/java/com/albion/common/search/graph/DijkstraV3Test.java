@@ -1,26 +1,29 @@
 package com.albion.common.search.graph;
 
-import com.albion.common.graph.core.v1.Graph;
-import com.albion.common.graph.core.v1.Vertex;
+import com.albion.common.graph.core.v3.Graph;
+import com.albion.common.graph.core.v3.Vertex;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.*;
+import java.util.List;
 
-public class DijkstraTest {
+public class DijkstraV3Test {
     @DataProvider(name = "dp01")
     public Object[][] makeData() {
         return new Object[][] {
-                {"src/test/resources/graph01.xml", 1, 4, 14},
-                {"src/test/resources/graph02.xml", 1, 5, 13}
+                {"src/test/resources/graph03.xml", "San Francisco", "Boston", 14},
+                {"src/test/resources/graph04.xml", "San Francisco", "Chicago", 13}
         };
     }
+
     @Test(dataProvider = "dp01")
-    public void testFindShortestPath(String filePath, int src, int destination, int expectedCost) throws Exception {
-        Graph g = new Graph(filePath);
-        Dijkstra dijkstra = new Dijkstra(g);
-        List<Vertex> result = dijkstra.findShortestDistance(src, destination);
+    public void testFindShortestPath(String filePath, String src, String destination, int expectedCost) throws Exception {
+        Graph<String> g = new Graph<>();
+        DijkstraV3 dijkstra = new DijkstraV3(g);
+        dijkstra.parseInputIDAsString(filePath);
+
+        List<Vertex<String>> result = dijkstra.findShortestDistance(src, destination);
         System.out.println("============");
         System.out.println(g.toString());
 
