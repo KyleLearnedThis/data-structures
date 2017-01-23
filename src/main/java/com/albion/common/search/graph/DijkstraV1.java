@@ -51,12 +51,6 @@ public class DijkstraV1 extends BaseDijkstra<Integer>{
         return map;
     }
 
-    private Vertex<Integer> initVertex(Element elem) {
-        int vertexId = Integer.parseInt(elem.getAttribute("id"));
-        Vertex<Integer> v = new Vertex<>(vertexId);
-        return v;
-    }
-
     private Vertex<Integer> addEdgesToAVertex(Vertex<Integer> vertex, NodeList list){
         List<Edge<Integer>> edgeList = new ArrayList<>();
         for(int j = 0; j < list.getLength(); j++){
