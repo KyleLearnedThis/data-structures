@@ -21,7 +21,7 @@ public class DijkstraV2Test {
     public void testFindShortestPath(String filePath, String src, String destination, int expectedCost) throws Exception {
         Graph<String> g = new Graph<>();
         DijkstraV2 dijkstra = new DijkstraV2(g);
-        dijkstra.parseInputIDAsString(filePath);
+        dijkstra.parseInput(filePath);
 
         List<Vertex<String>> result = dijkstra.findShortestDistance(src, destination);
         System.out.println("============");

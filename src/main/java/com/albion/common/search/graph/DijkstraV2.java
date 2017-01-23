@@ -1,92 +1,85 @@
 package com.albion.common.search.graph;
 
+import com.albion.common.graph.core.Directions;
 import com.albion.common.graph.core.v2.Edge;
 import com.albion.common.graph.core.v2.Graph;
-import com.albion.common.graph.core.v2.GraphUtility;
 import com.albion.common.graph.core.v2.Vertex;
+import com.albion.common.utils.XPathTask;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class DijkstraV2 {
-    private Graph<String> graph;
+public class DijkstraV2 extends BaseDijkstra<String> {
 
-    public void parseInputIDAsString(String filePath) {
-        HashMap<String, Vertex<String>> map = GraphUtility.parseInputIDString(filePath);
+    public DijkstraV2(Graph<String> g) {
+        super(g);
+    }
+
+    public void parseInput(String filePath) {
+        HashMap<String, Vertex<String>> map = parseInputIDAsString(filePath);
         graph.setVerticesMap(map);
     }
 
-    public DijkstraV2(Graph<String> g) {
-        this.graph = g;
-    }
+    public HashMap<String, Vertex<String>> parseInputIDAsString(String filePath){
+        HashMap<String, Vertex<String>> map = new HashMap<>();
+        File inputFile = new File(filePath);
 
-    public List<Vertex<String>> findShortestDistance(String source, String target) {
-        initialize(source);
-        List<Vertex<String>> queue = new ArrayList<>();
-        for(Map.Entry<String, Vertex<String>> entry : 	graph.getVerticesMap().entrySet()) {
-            Vertex<String> v = entry.getValue();
-            queue.add(v);
-        }
+        try {
+            XPathTask xpt = new XPathTask(inputFile);
+            NodeList vertexList = xpt.processQuery("//vertices/vertex");
 
-        while(!queue.isEmpty()){
-            Vertex<String> u = poll(queue);
-            int cost = u.getCost();
-            // String uid = u.getId();
-            // System.out.println("===== uid: " + uid + " cost: "+ cost);
-            List<Edge<String>> edgeList = u.getEdgeList();
-
-            for(Edge<String> edge : edgeList) {
-                String id = edge.getY();
-                int weight = edge.getWeight();
-                int alt = cost + weight;
-                Vertex v = graph.getVertex(id);
-                int neighborWeight = v.getCost();
-                if(alt <  neighborWeight) {
-                    v.setCost(alt);
-                    v.previous = u;
+            for(int i = 0; i < vertexList.getLength(); i++){
+                Node nNode = vertexList.item(i);
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element elem = (Element) nNode;
+                    String vertexId = elem.getAttribute("id");
+                    Vertex<String> vertex = new Vertex<>(vertexId);
+                    NodeList edgeList = elem.getElementsByTagName("edge");
+                    addEdgesToAVertex(vertex, edgeList);
+                    map.put(vertexId, vertex);
                 }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        List<Vertex<String>> result = new ArrayList<>();
-        Vertex<String> x = graph.getVerticesMap().get(target);
-        do{
-            result.add(0, x);
-            // System.out.println("===== id: " + x.getId() + " cost: " + x.getCost() + " =====");
-            x = x.previous;
-        } while(x != null);
-        return result;
+        return map;
     }
 
-    private Vertex<String> poll(List<Vertex<String>> list) {
-        int smallest = Integer.MAX_VALUE;
-        for(int i = 0; i < list.size(); i++){
-            int curCost = list.get(i).getCost();
-            if(smallest > curCost) {
-                smallest = curCost;
-            }
-        }
-        for(int i = 0; i < list.size(); i++) {
-            Vertex<String> v = list.get(i);
-            if(v.getCost() == smallest){
-                list.remove(i);
-                return v;
-            }
-        }
-        return null;
-    }
+    public Vertex<String> addEdgesToAVertex(Vertex<String> vertex, NodeList list){
+        List<Edge<String>> edgeList = new ArrayList<>();
+        for(int j = 0; j < list.getLength(); j++){
+            Node mNode = list.item(j);
+            if (mNode.getNodeType() == Node.ELEMENT_NODE) {
+                Element elem = (Element) mNode;
+                String id = elem.getAttribute("id");
+                String weight = elem.getAttribute("weight");
+                String direction = elem.getAttribute("direction");
 
-    private void initialize(String source){
-        for(Map.Entry<String, Vertex<String>> entry : graph.getVerticesMap().entrySet()){
-            Vertex<String> v = entry.getValue();
-            if(v.getId().equals(source)) {
-                v.setCost(0);
-            } else {
-                v.setCost(Integer.MAX_VALUE);
+                Directions way;
+                if(!"".equals(direction)){
+                    way = Directions.BOTH;
+                }else if(direction.equals("A_TO_B")){
+                    way = Directions.A_TO_B;
+                }else if(direction.equals("B_TO_A")){
+                    way = Directions.B_TO_A;
+                }else{
+                    way = Directions.BOTH;
+                }
+
+                if("".equals(weight)){
+                    weight = "0";
+                }
+                Edge<String> edge = new Edge<>(vertex.getId(), id, way, Integer.parseInt(weight));
+                edgeList.add(edge);
             }
-            v.previous = null;
         }
+        vertex.setEdgeList(edgeList);
+        return vertex;
     }
 }
