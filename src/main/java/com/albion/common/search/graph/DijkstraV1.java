@@ -1,6 +1,9 @@
-package com.albion.common.graph.core.v2;
+package com.albion.common.search.graph;
 
 import com.albion.common.graph.core.Directions;
+import com.albion.common.graph.core.v2.Edge;
+import com.albion.common.graph.core.v2.Graph;
+import com.albion.common.graph.core.v2.Vertex;
 import com.albion.common.utils.XPathTask;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -11,67 +14,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class GraphUtility {
+public class DijkstraV1 extends BaseDijkstra<Integer>{
 
-    public static HashMap<String, Vertex<String>> parseInputIDString(String filePath){
-        HashMap<String, Vertex<String>> map = new HashMap<>();
-		File inputFile = new File(filePath);
+    public DijkstraV1(Graph<Integer> g) {
+        super(g);
+    }
 
-		try {
-			XPathTask xpt = new XPathTask(inputFile);
-			NodeList vertexList = xpt.processQuery("//vertices/vertex");
+    public void parseInput(String filePath) {
+        HashMap<Integer, Vertex<Integer>> map = parseInputIDAsInteger(filePath);
+        graph.setVerticesMap(map);
+    }
 
-			for(int i = 0; i < vertexList.getLength(); i++){
-				Node nNode = vertexList.item(i);
-				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-					Element elem = (Element) nNode;
-					String vertexId = elem.getAttribute("id");
-					Vertex<String> vertex = new Vertex<>(vertexId);
-					NodeList edgeList = elem.getElementsByTagName("edge");
-					addEdgesToAVertexV2(vertex, edgeList);
-					map.put(vertexId, vertex);
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return map;
-	}
-
-	private static Vertex<String> addEdgesToAVertexV2(Vertex<String> vertex, NodeList list){
-		List<Edge<String>> edgeList = new ArrayList<>();
-		for(int j = 0; j < list.getLength(); j++){
-			Node mNode = list.item(j);
-			if (mNode.getNodeType() == Node.ELEMENT_NODE) {
-				Element elem = (Element) mNode;
-				String id = elem.getAttribute("id");
-				String weight = elem.getAttribute("weight");
-				String direction = elem.getAttribute("direction");
-
-				Directions way;
-				if(!"".equals(direction)){
-					way = Directions.BOTH;
-				}else if(direction.equals("A_TO_B")){
-					way = Directions.A_TO_B;
-				}else if(direction.equals("B_TO_A")){
-					way = Directions.B_TO_A;
-				}else{
-					way = Directions.BOTH;
-				}
-
-				if("".equals(weight)){
-					weight = "0";
-				}
-				Edge<String> edge = new Edge<>(vertex.getId(), id, way, Integer.parseInt(weight));
-				edgeList.add(edge);
-			}
-		}
-		vertex.setEdgeList(edgeList);
-		return vertex;
-	}
-
-    public static HashMap<Integer, Vertex<Integer>> parseInputIDInteger(String filePath){
+    public HashMap<Integer, Vertex<Integer>> parseInputIDAsInteger(String filePath){
         HashMap<Integer, Vertex<Integer>> map = new HashMap<>();
         File inputFile = new File(filePath);
 
@@ -86,7 +40,7 @@ public class GraphUtility {
                     int vertexId = Integer.parseInt(elem.getAttribute("id"));
                     Vertex<Integer> vertex = new Vertex<>(vertexId);
                     NodeList edgeList = elem.getElementsByTagName("edge");
-                    addEdgesToAVertexV1(vertex, edgeList);
+                    addEdgesToAVertex(vertex, edgeList);
                     map.put(vertexId, vertex);
                 }
             }
@@ -97,7 +51,13 @@ public class GraphUtility {
         return map;
     }
 
-    private static Vertex<Integer> addEdgesToAVertexV1(Vertex<Integer> vertex, NodeList list){
+    private Vertex<Integer> initVertex(Element elem) {
+        int vertexId = Integer.parseInt(elem.getAttribute("id"));
+        Vertex<Integer> v = new Vertex<>(vertexId);
+        return v;
+    }
+
+    private Vertex<Integer> addEdgesToAVertex(Vertex<Integer> vertex, NodeList list){
         List<Edge<Integer>> edgeList = new ArrayList<>();
         for(int j = 0; j < list.getLength(); j++){
             Node mNode = list.item(j);

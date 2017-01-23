@@ -8,13 +8,13 @@ import java.util.Map;
  * 	private M id; private N data;
  */
 public class Graph<T>{
-	private HashMap<String, Vertex<T>> verticesMap;
+	private HashMap<T, Vertex<T>> verticesMap;
 
 	public Graph() {
         setVerticesMap(new HashMap<>());
     }
 
-	public HashMap<String, Vertex<T>> getVerticesMap() {
+	public HashMap<T, Vertex<T>> getVerticesMap() {
 		return verticesMap;
 	}
 
@@ -22,13 +22,13 @@ public class Graph<T>{
 		return this.verticesMap.get(id);
 	}
 
-	public void setVerticesMap(HashMap<String, Vertex<T>> verticesMap) {
+	public void setVerticesMap(HashMap<T, Vertex<T>> verticesMap) {
 		this.verticesMap = verticesMap;
 	}
 
 	public String toString(){
 		StringBuffer s = new StringBuffer();
-		for(Map.Entry<String, Vertex<T>> entry: verticesMap.entrySet()){
+		for(Map.Entry<T, Vertex<T>> entry: verticesMap.entrySet()){
 			Vertex<T> v = entry.getValue();
 			s.append(v.toString());
 		}
