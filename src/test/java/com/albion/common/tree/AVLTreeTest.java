@@ -1,5 +1,6 @@
 package com.albion.common.tree;
 
+import com.albion.common.tree.avl.AVLTree;
 import org.testng.annotations.Test;
 
 public class AVLTreeTest {
