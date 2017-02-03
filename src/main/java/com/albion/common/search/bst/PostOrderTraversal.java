@@ -1,12 +1,12 @@
 package com.albion.common.search.bst;
 
-import com.albion.common.tree.TreeNode;
+import com.albion.common.tree.node.BinarySearchTreeNode;
 
 public class PostOrderTraversal<T extends Comparable<?>> implements Traversal {
 
-	protected TreeNode<T> root;
+	protected BinarySearchTreeNode<T> root;
 
-	public PostOrderTraversal(TreeNode<T> aRoot){
+	public PostOrderTraversal(BinarySearchTreeNode<T> aRoot){
 		root = aRoot;
 	}
 
@@ -15,7 +15,7 @@ public class PostOrderTraversal<T extends Comparable<?>> implements Traversal {
 		traverseWork(root);
 	}
 
-	public void traverseWork(TreeNode<T> node){
+	public void traverseWork(BinarySearchTreeNode<T> node){
 		if(node == null) {
 			return;
 		}

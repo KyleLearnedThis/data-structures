@@ -1,12 +1,12 @@
 package com.albion.common.search.bst;
 
-import com.albion.common.tree.TreeNode;
+import com.albion.common.tree.node.BinarySearchTreeNode;
 
 public class InOrderTraversal<T extends Comparable<?>>  implements Traversal {
 
-	protected TreeNode<T> root;
+	protected BinarySearchTreeNode<T> root;
 	
-	public InOrderTraversal(TreeNode<T> x) {
+	public InOrderTraversal(BinarySearchTreeNode<T> x) {
 		root = x;
 	}
 	
@@ -15,7 +15,7 @@ public class InOrderTraversal<T extends Comparable<?>>  implements Traversal {
 		traverseWork(root);
 	}
 	
-	public void traverseWork(TreeNode<T> node){
+	public void traverseWork(BinarySearchTreeNode<T> node){
 		if(node == null) {
 			return;
 		}

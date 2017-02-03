@@ -1,36 +1,36 @@
 package com.albion.common.search.bst;
 
-import com.albion.common.tree.TreeNode;
+import com.albion.common.tree.node.BinarySearchTreeNode;
 
 
 public class BinaryTreeInversion<T extends Comparable<?>> {
-	public TreeNode<T> root;
+	public BinarySearchTreeNode<T> root;
 
-	public BinaryTreeInversion(TreeNode<T> root) {
+	public BinaryTreeInversion(BinarySearchTreeNode<T> root) {
 		this.root = root;
 	}
 
-	public TreeNode<T> invertTree(TreeNode<T> root) {
+	public BinarySearchTreeNode<T> invertTree(BinarySearchTreeNode<T> root) {
 		if (root != null) {
 			helper(root);
 		}
 		return root;
 	}
 
-	public void helper(TreeNode<T> p) {
-		TreeNode<T> temp = p.left;
+	public void helper(BinarySearchTreeNode<T> p) {
+		BinarySearchTreeNode<T> temp = p.getLeft();
 		p.left = p.right;
 		p.right = temp;
 
 		if (p.left != null) {
-			helper(p.left);
+			helper(p.getLeft());
 		}
 		if (p.right != null) {
-			helper(p.right);
+			helper(p.getRight());
 		}
 	}
 
-	public TreeNode<T> invert() {
+	public BinarySearchTreeNode<T> invert() {
 		invertTree(this.root);
 		return this.root;
 	}

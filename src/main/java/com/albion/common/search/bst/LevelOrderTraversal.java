@@ -1,37 +1,37 @@
 package com.albion.common.search.bst;
 
 
-import com.albion.common.tree.TreeNode;
+import com.albion.common.tree.node.BinarySearchTreeNode;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
 public class LevelOrderTraversal <T extends Comparable<?>> implements Traversal{
-    protected TreeNode<T> root;
+    protected BinarySearchTreeNode<T> root;
 
-    public LevelOrderTraversal(TreeNode<T> x) {
+    public LevelOrderTraversal(BinarySearchTreeNode<T> x) {
         root = x;
     }
 
     @Override
     public void traverse() {
-        Queue<TreeNode<T>> queue=new LinkedList<>();
+        Queue<BinarySearchTreeNode<T>> queue=new LinkedList<>();
         queue.add(root);
         while(!queue.isEmpty()) {
-            TreeNode node = queue.poll();
+            BinarySearchTreeNode node = queue.poll();
             node.print();
             if(node.left!=null) {
-                queue.add(node.left);
+                queue.add(node.getLeft());
             }
             if(node.right!=null) {
-                queue.add(node.right);
+                queue.add(node.getRight());
             }
         }
     }
 
-    public List<List<T>> makeLevelOrderTree(TreeNode<T> root) {
-        Queue<TreeNode<T>> queue = new LinkedList<>();
+    public List<List<T>> makeLevelOrderTree(BinarySearchTreeNode<T> root) {
+        Queue<BinarySearchTreeNode<T>> queue = new LinkedList<>();
         List<List<T>> wrapList = new LinkedList<>();
 
         if(root == null) {
@@ -44,10 +44,10 @@ public class LevelOrderTraversal <T extends Comparable<?>> implements Traversal{
             List<T> subList = new LinkedList<>();
             for(int i=0; i<levelNum; i++) {
                 if(queue.peek().left != null) {
-                    queue.offer(queue.peek().left);
+                    queue.offer(queue.peek().getLeft());
                 }
                 if(queue.peek().right != null) {
-                    queue.offer(queue.peek().right);
+                    queue.offer(queue.peek().getRight());
                 }
                 subList.add(queue.poll().value);
             }

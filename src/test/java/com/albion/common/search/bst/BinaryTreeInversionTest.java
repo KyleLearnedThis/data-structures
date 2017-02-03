@@ -2,7 +2,7 @@ package com.albion.common.search.bst;
 
 import com.albion.common.tree.BinarySearchTree;
 import com.albion.common.tree.BinaryTreePrinter;
-import com.albion.common.tree.TreeNode;
+import com.albion.common.tree.node.BinarySearchTreeNode;
 import org.testng.annotations.Test;
 
 
@@ -16,7 +16,7 @@ public class BinaryTreeInversionTest {
             bt.insert(x);
         }
 
-        TreeNode<Integer> root = bt.getRoot();
+        BinarySearchTreeNode<Integer> root = bt.getRoot();
         BinaryTreePrinter.printNode(root);
 
         BinaryTreeInversion<Integer> bti = new BinaryTreeInversion<>(root);
