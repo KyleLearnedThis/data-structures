@@ -1,12 +1,14 @@
 package com.albion.common.tree;
 
+import com.albion.common.tree.node.BinarySearchTreeNode;
+
 public class BinarySearchTree<T extends Comparable<T>> {
-	protected TreeNode<T> root;
-	public TreeNode<T> getRoot() {
+	protected BinarySearchTreeNode<T> root;
+	public BinarySearchTreeNode<T> getRoot() {
 		return root;
 	}
 
-	public void setRoot(TreeNode<T> root) {
+	public void setRoot(BinarySearchTreeNode<T> root) {
 		this.root = root;
 	}
 
@@ -14,19 +16,19 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		root = null;
 	}
 
-	public BinarySearchTree(TreeNode<T> root) {
+	public BinarySearchTree(BinarySearchTreeNode<T> root) {
 		this.root = root;
 	}
 
 	public void insert(T data){
 		if (root == null) {
-			root = new TreeNode<T>(data, null, null, null);
+			root = new BinarySearchTreeNode<>(data, null, null, null);
 		}else{
 			internalInsert(root, data);
 		}
 	}
 
-	private void internalInsert(TreeNode<T> node, T data){
+	private void internalInsert(BinarySearchTreeNode<T> node, T data){
 		// Not the same value twice
 		if(this.find(data) != null) {
 			return;
@@ -38,21 +40,21 @@ public class BinarySearchTree<T extends Comparable<T>> {
 			return;
 		} else if (data.compareTo(val) == -1) {
 			if (node.getLeft() == null) {
-				node.setLeft(new TreeNode<>(data, node, null, null));
+				node.setLeft(new BinarySearchTreeNode<>(data, node, null, null));
 			} else {
 				internalInsert(node.getLeft(), data);
 			}
 		} else {
 			if (node.getRight() == null) {
-				node.setRight(new TreeNode<>(data, node, null, null));
+				node.setRight(new BinarySearchTreeNode<>(data, node, null, null));
 			} else {
 				internalInsert(node.getRight(), data);
 			}       
 		}
 	}
 
-	public TreeNode<T> find(T seek){
-		TreeNode<T> cur = root;
+	public BinarySearchTreeNode<T> find(T seek){
+		BinarySearchTreeNode<T> cur = root;
 
 		while(cur!=null){
 			if(seek.compareTo(cur.value) == 0){
@@ -69,11 +71,11 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		return null;
 	}
 
-	public TreeNode<T> findParent(T val) {
+	public BinarySearchTreeNode<T> findParent(T val) {
 		return findParent(val, root, null);
 	}
 
-	public TreeNode<T> findParent(T val, TreeNode<T> node, TreeNode<T> parent) {
+	public BinarySearchTreeNode<T> findParent(T val, BinarySearchTreeNode<T> node, BinarySearchTreeNode<T> parent) {
 		if (node == null) {
 			return null;
 		} else if (!node.getValue().equals(val)) {
@@ -85,14 +87,14 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		return parent;
 	}
 
-	public boolean isValidBST(TreeNode<T> p, T min, T max) {
+	public boolean isValidBST(BinarySearchTreeNode<T> p, T min, T max) {
 		if (p == null) {
 			return true;
 		}
 		if (p.value.compareTo(min) <= 0 || p.value.compareTo(max) >= 0){
 			return false;
 		}
-		return isValidBST(p.left, min, p.value) && isValidBST(p.right, p.value, max);
+		return isValidBST(p.getLeft(), min, p.value) && isValidBST(p.getRight(), p.value, max);
 	}
 
 }

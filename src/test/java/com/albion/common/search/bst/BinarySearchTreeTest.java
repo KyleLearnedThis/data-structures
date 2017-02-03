@@ -2,7 +2,7 @@ package com.albion.common.search.bst;
 
 import com.albion.common.tree.BinarySearchTree;
 import com.albion.common.tree.BinaryTreePrinter;
-import com.albion.common.tree.TreeNode;
+import com.albion.common.tree.node.BinarySearchTreeNode;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -14,15 +14,15 @@ public class BinarySearchTreeTest {
 	@DataProvider(name = "d01")
 	public Object[][] testPrint01() {
 
-	        TreeNode<Integer> root = new TreeNode<>(2);
-	        TreeNode<Integer> n11 = new TreeNode<>(7);
-	        TreeNode<Integer> n12 = new TreeNode<>(5);
-	        TreeNode<Integer> n21 = new TreeNode<>(2);
-	        TreeNode<Integer> n22 = new TreeNode<>(6);
-	        TreeNode<Integer> n23 = new TreeNode<>(9);
-	        TreeNode<Integer> n31 = new TreeNode<>(5);
-	        TreeNode<Integer> n32 = new TreeNode<>(8);
-	        TreeNode<Integer> n33 = new TreeNode<>(4);
+	        BinarySearchTreeNode<Integer> root = new BinarySearchTreeNode<>(2);
+	        BinarySearchTreeNode<Integer> n11 = new BinarySearchTreeNode<>(7);
+	        BinarySearchTreeNode<Integer> n12 = new BinarySearchTreeNode<>(5);
+	        BinarySearchTreeNode<Integer> n21 = new BinarySearchTreeNode<>(2);
+	        BinarySearchTreeNode<Integer> n22 = new BinarySearchTreeNode<>(6);
+	        BinarySearchTreeNode<Integer> n23 = new BinarySearchTreeNode<>(9);
+	        BinarySearchTreeNode<Integer> n31 = new BinarySearchTreeNode<>(5);
+	        BinarySearchTreeNode<Integer> n32 = new BinarySearchTreeNode<>(8);
+	        BinarySearchTreeNode<Integer> n33 = new BinarySearchTreeNode<>(4);
 
 	        root.left = n11;
 	        root.right = n12;
@@ -43,17 +43,17 @@ public class BinarySearchTreeTest {
 	@DataProvider(name = "d02")
 	public Object[][] buildBinarySearchTree02() {
 			//Page 290
-	        TreeNode<Integer> root = new TreeNode<>(15);
-	        TreeNode<Integer> n06 = new TreeNode<>(6);
-	        TreeNode<Integer> n18 = new TreeNode<>(18);
-	        TreeNode<Integer> n03 = new TreeNode<>(3);
-	        TreeNode<Integer> n07 = new TreeNode<>(7);
-	        TreeNode<Integer> n17 = new TreeNode<>(17);
-	        TreeNode<Integer> n20 = new TreeNode<>(20);
-	        TreeNode<Integer> n02 = new TreeNode<>(2);
-	        TreeNode<Integer> n04 = new TreeNode<>(4);
-	        TreeNode<Integer> n13 = new TreeNode<>(13);
-	        TreeNode<Integer> n09 = new TreeNode<>(9);
+	        BinarySearchTreeNode<Integer> root = new BinarySearchTreeNode<>(15);
+	        BinarySearchTreeNode<Integer> n06 = new BinarySearchTreeNode<>(6);
+	        BinarySearchTreeNode<Integer> n18 = new BinarySearchTreeNode<>(18);
+	        BinarySearchTreeNode<Integer> n03 = new BinarySearchTreeNode<>(3);
+	        BinarySearchTreeNode<Integer> n07 = new BinarySearchTreeNode<>(7);
+	        BinarySearchTreeNode<Integer> n17 = new BinarySearchTreeNode<>(17);
+	        BinarySearchTreeNode<Integer> n20 = new BinarySearchTreeNode<>(20);
+	        BinarySearchTreeNode<Integer> n02 = new BinarySearchTreeNode<>(2);
+	        BinarySearchTreeNode<Integer> n04 = new BinarySearchTreeNode<>(4);
+	        BinarySearchTreeNode<Integer> n13 = new BinarySearchTreeNode<>(13);
+	        BinarySearchTreeNode<Integer> n09 = new BinarySearchTreeNode<>(9);
 
 	        root.parent = null;
 	        root.left = n06;
@@ -86,31 +86,31 @@ public class BinarySearchTreeTest {
 	}
 
 	@Test(dataProvider = "d02")
-	public void testTreePrint(TreeNode<Integer> root) {
+	public void testTreePrint(BinarySearchTreeNode<Integer> root) {
 		BinaryTreePrinter.printNode(root);
 	}
 
 	@Test(dataProvider = "d02")
-	public void testInOrderTraversal(TreeNode<Integer> root) {
+	public void testInOrderTraversal(BinarySearchTreeNode<Integer> root) {
 		Traversal t = new InOrderTraversal<>(root);
 		t.traverse();
 	}
 
 	@Test(dataProvider = "d02")
-	public void testPostOrderTraversal(TreeNode<Integer> root) {
+	public void testPostOrderTraversal(BinarySearchTreeNode<Integer> root) {
 		Traversal t = new PostOrderTraversal<>(root);
 		t.traverse();
 	}
 
 	@Test(dataProvider = "d02")
-	public void testLevelOrderTraversal(TreeNode<Integer> root) {
+	public void testLevelOrderTraversal(BinarySearchTreeNode<Integer> root) {
 		BinaryTreePrinter.printNode(root);
 		Traversal t = new LevelOrderTraversal<>(root);
 		t.traverse();
 	}
 
 	@Test(dataProvider = "d02")
-	public void testLevelOrderTraversalV2(TreeNode<Integer> root) {
+	public void testLevelOrderTraversalV2(BinarySearchTreeNode<Integer> root) {
 		BinaryTreePrinter.printNode(root);
 		LevelOrderTraversal<Integer> trv = new LevelOrderTraversal<>(root);
 		List<List<Integer>> lists = trv.makeLevelOrderTree(root);
@@ -131,10 +131,10 @@ public class BinarySearchTreeTest {
 			bt.insert(x);
 		}
 
-		TreeNode<Integer> root = bt.getRoot();
+		BinarySearchTreeNode<Integer> root = bt.getRoot();
 		BinaryTreePrinter.printNode(root);
 
-		TreeNode<Integer> seek = bt.find(9);
+		BinarySearchTreeNode<Integer> seek = bt.find(9);
 		if(seek != null) {
 			seek.print();
 		}
@@ -150,7 +150,7 @@ public class BinarySearchTreeTest {
 			bt.insert(x);
 		}
 
-		TreeNode<Integer> root = bt.getRoot();
+		BinarySearchTreeNode<Integer> root = bt.getRoot();
 		BinaryTreePrinter.printNode(root);
 
 		boolean actual = bt.isValidBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);

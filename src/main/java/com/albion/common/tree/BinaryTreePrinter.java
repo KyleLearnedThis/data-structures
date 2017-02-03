@@ -1,18 +1,20 @@
 package com.albion.common.tree;
 
+import com.albion.common.tree.node.BaseTreeNode;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class BinaryTreePrinter {
 
-    public static <T extends Comparable<?>> void printNode(TreeNode<T> root) {
+    public static <T extends Comparable<?>> void printNode(BaseTreeNode<T> root) {
         int maxLevel = BinaryTreePrinter.maxLevel(root);
 
         printNodeInternal(Collections.singletonList(root), 1, maxLevel);
     }
 
-    private static <T extends Comparable<?>> void printNodeInternal(List<TreeNode<T>> nodes, int level, int maxLevel) {
+    private static <T extends Comparable<?>> void printNodeInternal(List<BaseTreeNode<T>> nodes, int level, int maxLevel) {
         if (nodes.isEmpty() || BinaryTreePrinter.isAllElementsNull(nodes))
             return;
 
@@ -23,12 +25,12 @@ public class BinaryTreePrinter {
 
         BinaryTreePrinter.printWhitespaces(firstSpaces);
 
-        List<TreeNode<T>> newNodes = new ArrayList<TreeNode<T>>();
-        for (TreeNode<T> node : nodes) {
+        List<BaseTreeNode<T>> newNodes = new ArrayList<BaseTreeNode<T>>();
+        for (BaseTreeNode<T> node : nodes) {
             if (node != null) {
                 System.out.print(node.value);
-                newNodes.add(node.left);
-                newNodes.add(node.right);
+                newNodes.add(node.getLeft());
+                newNodes.add(node.getRight());
             } else {
                 newNodes.add(null);
                 newNodes.add(null);
@@ -73,11 +75,11 @@ public class BinaryTreePrinter {
             System.out.print(" ");
     }
 
-    private static <T extends Comparable<?>> int maxLevel(TreeNode<T> node) {
+    private static <T extends Comparable<?>> int maxLevel(BaseTreeNode<T> node) {
         if (node == null)
             return 0;
 
-        return Math.max(BinaryTreePrinter.maxLevel(node.left), BinaryTreePrinter.maxLevel(node.right)) + 1;
+        return Math.max(BinaryTreePrinter.maxLevel(node.getLeft()), BinaryTreePrinter.maxLevel(node.getRight())) + 1;
     }
 
     private static <T> boolean isAllElementsNull(List<T> list) {
