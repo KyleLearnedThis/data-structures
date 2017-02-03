@@ -1,6 +1,6 @@
 package com.albion.common.tree.node;
 
-abstract public class BaseTreeNode<T> {
+public class BaseTreeNode<T> {
     public T value;
     public BaseTreeNode<T> left, right;
 

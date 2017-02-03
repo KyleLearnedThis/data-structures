@@ -7,6 +7,14 @@ public class TreeNode<T> extends BaseTreeNode<T>{
         height = 1;
     }
 
+    public void setLeft(TreeNode<T> l) {
+        left = l;
+    }
+
+    public void setRight(TreeNode<T> r) {
+        right = r;
+    }
+
     @Override
     public TreeNode<T> getLeft() {
         BaseTreeNode<T> left = this.left;

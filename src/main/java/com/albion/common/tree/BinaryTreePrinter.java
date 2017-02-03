@@ -1,6 +1,6 @@
 package com.albion.common.tree;
 
-import com.albion.common.tree.node.BinarySearchTreeNode;
+import com.albion.common.tree.node.BaseTreeNode;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,13 +8,13 @@ import java.util.List;
 
 public class BinaryTreePrinter {
 
-    public static <T extends Comparable<?>> void printNode(BinarySearchTreeNode<T> root) {
+    public static <T extends Comparable<?>> void printNode(BaseTreeNode<T> root) {
         int maxLevel = BinaryTreePrinter.maxLevel(root);
 
         printNodeInternal(Collections.singletonList(root), 1, maxLevel);
     }
 
-    private static <T extends Comparable<?>> void printNodeInternal(List<BinarySearchTreeNode<T>> nodes, int level, int maxLevel) {
+    private static <T extends Comparable<?>> void printNodeInternal(List<BaseTreeNode<T>> nodes, int level, int maxLevel) {
         if (nodes.isEmpty() || BinaryTreePrinter.isAllElementsNull(nodes))
             return;
 
@@ -25,8 +25,8 @@ public class BinaryTreePrinter {
 
         BinaryTreePrinter.printWhitespaces(firstSpaces);
 
-        List<BinarySearchTreeNode<T>> newNodes = new ArrayList<BinarySearchTreeNode<T>>();
-        for (BinarySearchTreeNode<T> node : nodes) {
+        List<BaseTreeNode<T>> newNodes = new ArrayList<BaseTreeNode<T>>();
+        for (BaseTreeNode<T> node : nodes) {
             if (node != null) {
                 System.out.print(node.value);
                 newNodes.add(node.getLeft());
@@ -75,7 +75,7 @@ public class BinaryTreePrinter {
             System.out.print(" ");
     }
 
-    private static <T extends Comparable<?>> int maxLevel(BinarySearchTreeNode<T> node) {
+    private static <T extends Comparable<?>> int maxLevel(BaseTreeNode<T> node) {
         if (node == null)
             return 0;
 

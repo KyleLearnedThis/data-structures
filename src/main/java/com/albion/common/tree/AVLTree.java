@@ -6,22 +6,24 @@ public class AVLTree extends BaseAVLTree<Integer> {
     TreeNode<Integer> insert(TreeNode<Integer> node, Integer key) {
         /* 1.  Perform the normal BST insertion */
         if (node == null) {
-            return (new TreeNode<Integer>(key));
+            return new TreeNode<>(key);
         }
+
         if (key < node.value) {
             TreeNode<Integer> left = node.getLeft();
-            left = insert(node.getLeft(), key);
-        }
-        else if (key > node.value) {
+            left = insert(left, key);
+            node.setLeft(left);
+        } else if (key > node.value) {
             TreeNode<Integer> right = node.getRight();
-            right = insert(node.getRight(), key);
-        }
-        else // Duplicate keys not allowed
+            right = insert(right, key);
+            node.setRight(right);
+        } else {
+            // Duplicate keys not allowed
             return node;
+        }
 
         /* 2. Update height of this ancestor node */
-        node.height = 1 + max(height(node.getLeft()),
-                height(node.getRight()));
+        node.height = 1 + max(height(node.getLeft()), height(node.getRight()));
 
         /* 3. Get the balance factor of this ancestor
               node to check whether this node became
@@ -30,8 +32,9 @@ public class AVLTree extends BaseAVLTree<Integer> {
 
         // If this node becomes unbalanced, then there
         // are 4 cases Left Left Case
-        if (balance > 1 && key < node.left.value)
+        if (balance > 1 && key < node.left.value) {
             return rightRotate(node);
+        }
 
         // Right Right Case
         if (balance < -1 && key > node.right.value) {
@@ -41,14 +44,16 @@ public class AVLTree extends BaseAVLTree<Integer> {
         // Left Right Case
         if (balance > 1 && key > node.left.value) {
             TreeNode<Integer> left = node.getLeft();
-            left = leftRotate(node.getLeft());
+            left = leftRotate(left);
+            node.setLeft(left);
             return rightRotate(node);
         }
 
         // Right Left Case
         if (balance < -1 && key < node.right.value) {
             TreeNode<Integer> right = node.getRight();
-            right = rightRotate(node.getRight());
+            right = rightRotate(right);
+            node.setRight(right);
             return leftRotate(node);
         }
 
