@@ -22,7 +22,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
 	public void insert(T data){
 		if (root == null) {
-			root = new BinarySearchTreeNode<T>(data, null, null, null);
+			root = new BinarySearchTreeNode<>(data, null, null, null);
 		}else{
 			internalInsert(root, data);
 		}

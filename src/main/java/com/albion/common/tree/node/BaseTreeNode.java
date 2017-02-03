@@ -31,4 +31,8 @@ public class BaseTreeNode<T> {
     public void setRight(BaseTreeNode<T> right) {
         this.right = right;
     }
+
+    public void print() {
+        System.out.print("[" + value + "] ");
+    }
 }

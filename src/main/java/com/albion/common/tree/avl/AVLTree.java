@@ -3,7 +3,7 @@ package com.albion.common.tree.avl;
 import com.albion.common.tree.node.TreeNode;
 
 public class AVLTree extends BaseAVLTree<Integer> {
-    TreeNode<Integer> insert(TreeNode<Integer> node, Integer key) {
+    public TreeNode<Integer> insert(TreeNode<Integer> node, Integer key) {
         /* 1.  Perform the normal BST insertion */
         if (node == null) {
             return new TreeNode<>(key);

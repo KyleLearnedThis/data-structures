@@ -1,25 +1,25 @@
 package com.albion.common.search.bst;
 
 
-import com.albion.common.tree.node.BinarySearchTreeNode;
+import com.albion.common.tree.node.BaseTreeNode;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
 public class LevelOrderTraversal <T extends Comparable<?>> implements Traversal{
-    protected BinarySearchTreeNode<T> root;
+    protected BaseTreeNode<T> root;
 
-    public LevelOrderTraversal(BinarySearchTreeNode<T> x) {
+    public LevelOrderTraversal(BaseTreeNode<T> x) {
         root = x;
     }
 
     @Override
     public void traverse() {
-        Queue<BinarySearchTreeNode<T>> queue=new LinkedList<>();
+        Queue<BaseTreeNode<T>> queue=new LinkedList<>();
         queue.add(root);
         while(!queue.isEmpty()) {
-            BinarySearchTreeNode node = queue.poll();
+            BaseTreeNode<T> node = queue.poll();
             node.print();
             if(node.left!=null) {
                 queue.add(node.getLeft());
@@ -30,8 +30,8 @@ public class LevelOrderTraversal <T extends Comparable<?>> implements Traversal{
         }
     }
 
-    public List<List<T>> makeLevelOrderTree(BinarySearchTreeNode<T> root) {
-        Queue<BinarySearchTreeNode<T>> queue = new LinkedList<>();
+    public List<List<T>> makeLevelOrderTree(BaseTreeNode<T> root) {
+        Queue<BaseTreeNode<T>> queue = new LinkedList<>();
         List<List<T>> wrapList = new LinkedList<>();
 
         if(root == null) {
