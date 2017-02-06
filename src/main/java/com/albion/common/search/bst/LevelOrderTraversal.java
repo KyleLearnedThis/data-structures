@@ -28,6 +28,7 @@ public class LevelOrderTraversal <T extends Comparable<?>> implements Traversal{
                 queue.add(node.getRight());
             }
         }
+        System.out.println("");
     }
 
     public List<List<T>> makeLevelOrderTree(BaseTreeNode<T> root) {

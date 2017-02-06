@@ -55,10 +55,10 @@ abstract public class BaseAVLTree<T extends Comparable<T>> {
     }
 
     // Get Balance factor of node N
-    int getBalance(TreeNode<T> N) {
-        if (N == null) {
+    int getBalance(TreeNode<T> node) {
+        if (node == null) {
             return 0;
         }
-        return height(N.getLeft()) - height(N.getRight());
+        return height(node.getLeft()) - height(node.getRight());
     }
 }

@@ -13,6 +13,7 @@ public class PostOrderTraversal<T extends Comparable<?>> implements Traversal {
 	@Override
 	public void traverse() {
 		traverseWork(root);
+		System.out.println("");
 	}
 
 	public void traverseWork(BaseTreeNode<T> node){
