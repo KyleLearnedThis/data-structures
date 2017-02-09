@@ -1,5 +1,6 @@
 package com.albion.common.maps.cache.lfu;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class LFUCacheTest {
@@ -56,5 +57,21 @@ public class LFUCacheTest {
         cache.add(7, "Gum");
         System.out.println("======= AFTER 2 =======");
         cache.printMap();
+
+        for (int i = 0; i < 7; i++) {
+            cache.get(7);
+        }
+        System.out.println("======= AFTER 3 =======");
+        cache.printMap();
+
+        String m1 = cache.get(5);
+        Assert.assertEquals("Edelweiss", m1);
+
+        cache.add(8, "Froyo");
+        System.out.println("======= AFTER 4 =======");
+        cache.printMap();
+
+        m1 = cache.get(5);
+        Assert.assertNull(m1);
     }
 }
