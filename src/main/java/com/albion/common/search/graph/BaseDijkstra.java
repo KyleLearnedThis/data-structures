@@ -4,9 +4,7 @@ import com.albion.common.graph.core.v2.Edge;
 import com.albion.common.graph.core.v2.Graph;
 import com.albion.common.graph.core.v2.Vertex;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 abstract public class BaseDijkstra<T> {
     protected Graph<T> graph;
@@ -17,17 +15,15 @@ abstract public class BaseDijkstra<T> {
 
     public List<Vertex<T>> findShortestDistance(T source, T target) {
         initialize(source);
-        List<Vertex<T>> queue = new ArrayList<>();
+        PriorityQueue<Vertex<T>> queue = new PriorityQueue<>((o1, o2)->(o1.getCost() - o2.getCost()));
         for(Map.Entry<T, Vertex<T>> entry : graph.getVerticesMap().entrySet()) {
             Vertex<T> v = entry.getValue();
             queue.add(v);
         }
 
         while(!queue.isEmpty()){
-            Vertex<T> u = poll(queue);
+            Vertex<T> u = queue.poll();
             int cost = u.getCost();
-            // T uid = u.getId();
-            // System.out.println("===== uid: " + uid + " cost: "+ cost);
             List<Edge<T>> edgeList = u.getEdgeList();
 
             for(Edge<T> edge : edgeList) {
@@ -35,10 +31,12 @@ abstract public class BaseDijkstra<T> {
                 int weight = edge.getWeight();
                 int alt = cost + weight;
                 Vertex<T> v = graph.getVertex(id);
+
                 int neighborWeight = v.getCost();
                 if(alt <  neighborWeight) {
                     v.setCost(alt);
                     v.previous = u;
+                    refreshQueue(queue, v);
                 }
             }
         }
@@ -53,22 +51,20 @@ abstract public class BaseDijkstra<T> {
         return result;
     }
 
-    private Vertex<T> poll(List<Vertex<T>> list) {
-        int smallest = Integer.MAX_VALUE;
-        for(int i = 0; i < list.size(); i++){
-            int curCost = list.get(i).getCost();
-            if(smallest > curCost) {
-                smallest = curCost;
+    private void refreshQueue(PriorityQueue<Vertex<T>> queue, Vertex<T> vertex) {
+        Vertex<T> removeVertex = null;
+        Iterator<Vertex<T>> iterator = queue.iterator();
+        while(iterator.hasNext()){
+            Vertex<T> v = iterator.next();
+            if(vertex.getId() == v.getId()){
+                removeVertex = v;
+                break;
             }
         }
-        for(int i = 0; i < list.size(); i++) {
-            Vertex<T> v = list.get(i);
-            if(v.getCost() == smallest){
-                list.remove(i);
-                return v;
-            }
+        if(removeVertex != null) {
+            queue.remove(removeVertex);
+            queue.add(removeVertex);
         }
-        return null;
     }
 
     private void initialize(T source){
