@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.PriorityQueue;
 
 public class LFUCache {
-    private static int initialCapacity = 10;
+    private int initialCapacity = 10;
     private PriorityQueue<MapEntry> entries = new PriorityQueue<>();
     private LinkedHashMap<Integer, CacheEntry> cacheMap = new LinkedHashMap<>();
 
@@ -53,9 +53,9 @@ public class LFUCache {
     }
 
     public void printCacheEntries() {
-        Iterator<MapEntry> iter = this.entries.iterator();
-        while(iter.hasNext()){
-            MapEntry entry = iter.next();
+        Iterator<MapEntry> iterator = this.entries.iterator();
+        while(iterator.hasNext()){
+            MapEntry entry = iterator.next();
             entry.print();
         }
     }
