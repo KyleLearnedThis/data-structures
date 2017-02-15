@@ -97,4 +97,34 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		return isValidBST(p.getLeft(), min, p.value) && isValidBST(p.getRight(), p.value, max);
 	}
 
+	public BinarySearchTreeNode<T> deleteNode(BinarySearchTreeNode<T> root, T key) {
+		if(root == null){
+			return null;
+		}
+
+		int val = key.compareTo(root.getValue());
+		if(val == -1) {
+			root.left = deleteNode(root.getLeft(), key);
+		} else if( val == 1) {
+			root.right = deleteNode(root.getRight(), key);
+		} else {
+			if(root.left == null){
+				return root.getRight();
+			}else if(root.right == null){
+				return root.getLeft();
+			}
+
+			BinarySearchTreeNode<T> minNode = findMin(root.getRight());
+			root.value = minNode.getValue();
+			root.right = deleteNode(root.getRight(), root.getValue());
+		}
+		return root;
+	}
+
+	private BinarySearchTreeNode<T> findMin(BinarySearchTreeNode<T> node){
+		while(node.getLeft() != null){
+			node = node.getLeft();
+		}
+		return node;
+	}
 }
