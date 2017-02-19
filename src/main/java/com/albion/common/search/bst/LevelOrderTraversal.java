@@ -31,7 +31,13 @@ public class LevelOrderTraversal <T extends Comparable<?>> implements Traversal{
         System.out.println("");
     }
 
-    public List<List<T>> makeLevelOrderTree(BaseTreeNode<T> root) {
+    /**
+     * https://leetcode.com/problems/binary-tree-level-order-traversal-ii
+     * @param root
+     * @param isBottomUp If true, put leaves at top.
+     * @return
+     */
+    public List<List<T>> makeLevelOrderTree(BaseTreeNode<T> root, boolean isBottomUp) {
         Queue<BaseTreeNode<T>> queue = new LinkedList<>();
         List<List<T>> wrapList = new LinkedList<>();
 
@@ -52,7 +58,11 @@ public class LevelOrderTraversal <T extends Comparable<?>> implements Traversal{
                 }
                 subList.add(queue.poll().value);
             }
-            wrapList.add(subList);
+            if(!isBottomUp){
+                wrapList.add(subList);
+            } else {
+                wrapList.add(0, subList);
+            }
         }
         return wrapList;
     }
