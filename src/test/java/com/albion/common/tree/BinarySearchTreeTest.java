@@ -114,7 +114,7 @@ public class BinarySearchTreeTest {
 	public void testLevelOrderTraversalV2(BinarySearchTreeNode<Integer> root) {
 		BinaryTreePrinter.printNode(root);
 		LevelOrderTraversal<Integer> trv = new LevelOrderTraversal<>(root);
-		List<List<Integer>> lists = trv.makeLevelOrderTree(root);
+		List<List<Integer>> lists = trv.makeLevelOrderTree(root, true);
 		for(List<Integer> list : lists) {
 			for(Integer i : list) {
 				System.out.print(" [" + i + "]");
