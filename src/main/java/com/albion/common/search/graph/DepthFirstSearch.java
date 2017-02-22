@@ -9,13 +9,17 @@ import java.util.Stack;
 
 public class DepthFirstSearch {
 	public static Vertex locate(Graph graph, Integer source, Integer target){
+
 		Stack<Vertex> stack = new Stack<>();
 		Vertex root = graph.getVertex(source);
+		if(root == null) {
+			return null;
+		}
 
 		stack.add(root);
 		root.setVisited(true);
 
-		while(!stack.isEmpty()) {			
+		while(!stack.isEmpty()) {
 			List<Edge> list = stack.pop().getEdgeList();
 			for(Edge edge : list) {
 				int vertexId = edge.getY();

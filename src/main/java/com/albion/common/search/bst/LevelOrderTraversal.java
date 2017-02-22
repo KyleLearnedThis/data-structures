@@ -16,7 +16,7 @@ public class LevelOrderTraversal <T extends Comparable<?>> implements Traversal{
 
     @Override
     public void traverse() {
-        Queue<BaseTreeNode<T>> queue=new LinkedList<>();
+        Queue<BaseTreeNode<T>> queue = new LinkedList<>();
         queue.add(root);
         while(!queue.isEmpty()) {
             BaseTreeNode<T> node = queue.poll();
