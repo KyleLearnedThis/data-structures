@@ -16,15 +16,15 @@ public class LevelOrderTraversal <T extends Comparable<?>> implements Traversal{
 
     @Override
     public void traverse() {
-        Queue<BaseTreeNode<T>> queue=new LinkedList<>();
+        Queue<BaseTreeNode<T>> queue = new LinkedList<>();
         queue.add(root);
         while(!queue.isEmpty()) {
             BaseTreeNode<T> node = queue.poll();
             node.print();
-            if(node.left!=null) {
+            if(node.left != null) {
                 queue.add(node.getLeft());
             }
-            if(node.right!=null) {
+            if(node.right != null) {
                 queue.add(node.getRight());
             }
         }
@@ -50,13 +50,19 @@ public class LevelOrderTraversal <T extends Comparable<?>> implements Traversal{
             int levelNum = queue.size();
             List<T> subList = new LinkedList<>();
             for(int i=0; i<levelNum; i++) {
-                if(queue.peek().left != null) {
-                    queue.offer(queue.peek().getLeft());
+                BaseTreeNode<T> node = queue.poll();
+                BaseTreeNode<T> left = node.getLeft();
+                BaseTreeNode<T> right = node.getRight();
+
+                if(left != null) {
+                    queue.offer(left);
                 }
-                if(queue.peek().right != null) {
-                    queue.offer(queue.peek().getRight());
+
+                if(right != null) {
+                    queue.offer(right);
                 }
-                subList.add(queue.poll().value);
+
+                subList.add(node.getValue());
             }
             if(!isBottomUp){
                 wrapList.add(subList);

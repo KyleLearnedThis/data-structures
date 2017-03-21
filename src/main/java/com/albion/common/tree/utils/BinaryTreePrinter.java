@@ -1,4 +1,4 @@
-package com.albion.common.tree;
+package com.albion.common.tree.utils;
 
 import com.albion.common.tree.node.BaseTreeNode;
 

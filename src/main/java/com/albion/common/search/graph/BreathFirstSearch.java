@@ -25,12 +25,7 @@ public class BreathFirstSearch {
 			
 			List<Edge> edgeList = v.getEdgeList();
 			for(Edge edge:edgeList){
-				Vertex x = graph.getVerticesMap().get(edge.getX());
 				Vertex y = graph.getVerticesMap().get(edge.getY());
-				if(x.isVisited() == false){
-					x.setVisited(true);
-					queue.add(x);
-				}
 				if(y.isVisited() == false){
 					y.setVisited(true);
 					queue.add(y);
