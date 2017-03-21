@@ -29,15 +29,12 @@ public class BinarySearchTree<T extends Comparable<T>> {
 	}
 
 	private void internalInsert(BinarySearchTreeNode<T> node, T data){
-		// Not the same value twice
-		if(this.find(data) != null) {
-			return;
-		}
 		T val = node.getValue();
+		int compare = data.compareTo(val);
 
-		if (data == node.getValue()) {
+		if (compare == 0) {
 			return;
-		} else if (data.compareTo(val) == -1) {
+		} else if (compare == -1) {
 			if (node.getLeft() == null) {
 				node.setLeft(new BinarySearchTreeNode<>(data, node, null, null));
 			} else {
@@ -77,7 +74,9 @@ public class BinarySearchTree<T extends Comparable<T>> {
 	public BinarySearchTreeNode<T> findParent(T val, BinarySearchTreeNode<T> node, BinarySearchTreeNode<T> parent) {
 		if (node == null) {
 			return null;
-		} else if (!node.getValue().equals(val)) {
+		}
+
+		if (!node.getValue().equals(val)) {
 			parent = findParent(val, node.getLeft(), node);
 			if (parent == null) {
 				parent = findParent(val, node.getRight(), node);

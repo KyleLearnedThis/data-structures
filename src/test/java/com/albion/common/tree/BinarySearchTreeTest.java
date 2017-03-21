@@ -145,6 +145,24 @@ public class BinarySearchTreeTest {
 	}
 
 	@Test
+	public void testFindParent() {
+		Integer[] array = {15, 6, 18, 3, 7, 17, 20, 2, 4, 13, 9};
+		BinarySearchTree bt = new BinarySearchTree();
+
+		for(Integer x : array) {
+			bt.insert(x);
+		}
+
+		BinarySearchTreeNode<Integer> root = bt.getRoot();
+		BinaryTreePrinter.printNode(root);
+
+		BinarySearchTree bst = new BinarySearchTree(root);
+		BinarySearchTreeNode<Integer> parent = bst.findParent(17);
+		int parentID = parent.getValue();
+		Assert.assertEquals(parentID, 18);
+	}
+
+	@Test
 	public void testValidBST() {
 		Integer[] array = {15, 6, 18, 3, 7, 17, 20, 2, 4, 13, 9};
 		BinarySearchTree<Integer> bt = new BinarySearchTree();
