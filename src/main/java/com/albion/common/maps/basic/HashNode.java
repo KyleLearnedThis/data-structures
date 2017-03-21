@@ -1,4 +1,4 @@
-package com.albion.common.maps;
+package com.albion.common.maps.basic;
 
 class HashNode<K, V> {
     K key;

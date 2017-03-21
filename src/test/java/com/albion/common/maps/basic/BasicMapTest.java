@@ -1,11 +1,11 @@
-package com.albion.common.maps;
+package com.albion.common.maps.basic;
 
 import org.testng.annotations.Test;
 
-public class MapTest {
+public class BasicMapTest {
     @Test
     public void testAdd() throws Exception {
-        Map<String, Integer>map = new Map<>();
+        BasicMap<String, Integer> map = new BasicMap<>();
         map.add("this",1 );
         map.add("coder",2 );
         map.add("this",4 );

@@ -1,4 +1,4 @@
-package com.albion.common.maps;
+package com.albion.common.maps.basic;
 
 import java.util.ArrayList;
 
@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * @param <K> Key
  * @param <V> Value
  */
-class Map<K, V> {
+class BasicMap<K, V> {
     // bucketArray is used to store array of chains
     private ArrayList<HashNode<K, V>> bucketArray;
 
@@ -22,14 +22,15 @@ class Map<K, V> {
 
     // Constructor (Initializes capacity, size and
     // empty chains.
-    public Map() {
+    public BasicMap() {
         bucketArray = new ArrayList<>();
         numBuckets = 10;
         size = 0;
 
         // Create empty chains
-        for (int i = 0; i < numBuckets; i++)
+        for (int i = 0; i < numBuckets; i++) {
             bucketArray.add(null);
+        }
     }
 
     public int size() { return size; }
@@ -141,7 +142,7 @@ class Map<K, V> {
 
     // Driver method to test Map class
     public static void main(String[] args) {
-        Map<String, Integer>map = new Map<>();
+        BasicMap<String, Integer> map = new BasicMap<>();
         map.add("this",1 );
         map.add("coder",2 );
         map.add("this",4 );

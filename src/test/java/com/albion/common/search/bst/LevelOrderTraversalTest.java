@@ -1,7 +1,7 @@
 package com.albion.common.search.bst;
 
-import com.albion.common.tree.BinarySearchTree;
-import com.albion.common.tree.BinaryTreePrinter;
+import com.albion.common.tree.bst.BinarySearchTree;
+import com.albion.common.tree.utils.BinaryTreePrinter;
 import com.albion.common.tree.node.BinarySearchTreeNode;
 import org.testng.annotations.Test;
 

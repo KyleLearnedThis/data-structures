@@ -1,6 +1,7 @@
 package com.albion.common.tree;
 
 import com.albion.common.tree.avl.AVLTree;
+import com.albion.common.tree.utils.BinaryTreePrinter;
 import org.testng.annotations.Test;
 
 public class AVLTreeTest {
