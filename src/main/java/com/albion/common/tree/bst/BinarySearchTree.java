@@ -33,7 +33,6 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		if(this.find(data) != null) {
 			return;
 		}
-
 		T val = node.getValue();
 
 		if (data == node.getValue()) {

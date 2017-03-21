@@ -18,5 +18,4 @@ public class BreathFirstSearchTest {
         Vertex v2 = BreathFirstSearch.locate(g, 1, 5);
         Assert.assertNull(v2);
     }
-
 }
