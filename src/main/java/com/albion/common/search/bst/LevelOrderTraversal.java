@@ -39,37 +39,37 @@ public class LevelOrderTraversal <T extends Comparable<?>> implements Traversal{
      */
     public List<List<T>> makeLevelOrderTree(BaseTreeNode<T> root, boolean isBottomUp) {
         Queue<BaseTreeNode<T>> queue = new LinkedList<>();
-        List<List<T>> wrapList = new LinkedList<>();
+        List<List<T>> resultLists = new LinkedList<>();
 
         if(root == null) {
-            return wrapList;
+            return resultLists;
         }
 
-        queue.offer(root);
+        queue.add(root);
         while(!queue.isEmpty()){
             int levelNum = queue.size();
             List<T> subList = new LinkedList<>();
             for(int i=0; i<levelNum; i++) {
-                BaseTreeNode<T> node = queue.poll();
+                BaseTreeNode<T> node = queue.remove();
                 BaseTreeNode<T> left = node.getLeft();
                 BaseTreeNode<T> right = node.getRight();
 
                 if(left != null) {
-                    queue.offer(left);
+                    queue.add(left);
                 }
 
                 if(right != null) {
-                    queue.offer(right);
+                    queue.add(right);
                 }
 
                 subList.add(node.getValue());
             }
             if(!isBottomUp){
-                wrapList.add(subList);
+                resultLists.add(subList);
             } else {
-                wrapList.add(0, subList);
+                resultLists.add(0, subList);
             }
         }
-        return wrapList;
+        return resultLists;
     }
 }

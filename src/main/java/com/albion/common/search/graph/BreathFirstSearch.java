@@ -15,8 +15,7 @@ public class BreathFirstSearch {
 		queue.add(root);
 		
 		while(!queue.isEmpty()){
-			Vertex v = queue.get(0);
-			queue.remove(0);
+			Vertex v = queue.remove(0);
 			
 			if(v.getId() == target.intValue()){
 				v.setVisited(true);
@@ -24,11 +23,12 @@ public class BreathFirstSearch {
 			}
 			
 			List<Edge> edgeList = v.getEdgeList();
-			for(Edge edge:edgeList){
-				Vertex y = graph.getVerticesMap().get(edge.getY());
-				if(y.isVisited() == false){
-					y.setVisited(true);
-					queue.add(y);
+			for(Edge edge : edgeList){
+				int vertexId = edge.getY();
+				Vertex w = graph.getVerticesMap().get(vertexId);
+				if(w.isVisited() == false){
+					w.setVisited(true);
+					queue.add(w);
 				}
 			}
 		}

@@ -4,8 +4,7 @@ import com.albion.common.tree.node.BaseTreeNode;
 
 public class InOrderTraversal<T extends Comparable<?>>  implements Traversal {
 
-	protected
-	BaseTreeNode<T> root;
+	protected BaseTreeNode<T> root;
 	
 	public InOrderTraversal(BaseTreeNode<T> x) {
 		root = x;
