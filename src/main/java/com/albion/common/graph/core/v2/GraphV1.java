@@ -12,7 +12,10 @@ import java.util.HashMap;
 import java.util.List;
 
 public class GraphV1 extends BaseGraph {
+    public GraphV1() {
 
+    }
+    
     public GraphV1(String filePath) {
         parseInput(filePath);
     }

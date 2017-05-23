@@ -10,6 +10,10 @@ abstract public class BaseDijkstra<T> {
     protected BaseGraph<T> graph;
     String filePath;
 
+    public BaseDijkstra(){
+
+    }
+
     public BaseDijkstra(BaseGraph<T> g) {
         this.graph = g;
     }

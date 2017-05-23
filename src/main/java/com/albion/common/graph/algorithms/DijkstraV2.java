@@ -4,6 +4,9 @@ import com.albion.common.graph.core.v2.BaseGraph;
 import com.albion.common.graph.core.v2.GraphV2;
 
 public class DijkstraV2 extends BaseDijkstra<String> {
+    public DijkstraV2() {
+        
+    }
 
     public DijkstraV2(String filePath){
         super(filePath);

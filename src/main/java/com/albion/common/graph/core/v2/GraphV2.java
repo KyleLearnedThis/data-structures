@@ -12,6 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 
 public class GraphV2 extends BaseGraph {
+    public GraphV2() {
+
+    }
 
     public GraphV2(String filePath){
         parseInput(filePath);
