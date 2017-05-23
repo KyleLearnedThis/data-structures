@@ -3,7 +3,7 @@ package com.albion.common.graph.core.v2;
 
 import com.albion.common.graph.core.Directions;
 
-public class Edge<T> {
+public class Edge<T> implements Comparable<Edge<T>> {
 	T x;
 	T y;
 	private Directions direction;     // A_TO_B, B_TO_A or BOTH
@@ -51,5 +51,7 @@ public class Edge<T> {
 		String s = "\t\t{"+x+", "+y+"}  [weight: "+weight+"]-["+direction+"]\n";
 		return s;
 	}
-
+	public int compareTo(Edge<T> o) {
+		return this.weight-o.weight;
+	}
 }

@@ -1,9 +1,9 @@
-package com.albion.common.tree;
+package com.albion.common.tree.bst;
 
-import com.albion.common.search.bst.InOrderTraversal;
-import com.albion.common.search.bst.LevelOrderTraversal;
-import com.albion.common.search.bst.PostOrderTraversal;
-import com.albion.common.search.bst.Traversal;
+import com.albion.common.tree.bst.traversal.InOrderTraversal;
+import com.albion.common.tree.bst.traversal.LevelOrderTraversal;
+import com.albion.common.tree.bst.traversal.PostOrderTraversal;
+import com.albion.common.tree.bst.traversal.Traversal;
 import com.albion.common.tree.bst.BinarySearchTree;
 import com.albion.common.tree.node.BinarySearchTreeNode;
 import com.albion.common.tree.utils.BinaryTreePrinter;

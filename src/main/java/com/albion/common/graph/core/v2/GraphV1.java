@@ -1,9 +1,6 @@
-package com.albion.common.search.graph;
+package com.albion.common.graph.core.v2;
 
 import com.albion.common.graph.core.Directions;
-import com.albion.common.graph.core.v2.Edge;
-import com.albion.common.graph.core.v2.Graph;
-import com.albion.common.graph.core.v2.Vertex;
 import com.albion.common.utils.XPathTask;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -14,19 +11,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class DijkstraV2 extends BaseDijkstra<String> {
+public class GraphV1 extends BaseGraph {
 
-    public DijkstraV2(Graph<String> g) {
-        super(g);
+    public GraphV1(String filePath) {
+        parseInput(filePath);
     }
 
     public void parseInput(String filePath) {
-        HashMap<String, Vertex<String>> map = parseInputIDAsString(filePath);
-        graph.setVerticesMap(map);
+        HashMap<Integer, Vertex<Integer>> map = parseInputIDAsInteger(filePath);
+        setVerticesMap(map);
     }
 
-    public HashMap<String, Vertex<String>> parseInputIDAsString(String filePath){
-        HashMap<String, Vertex<String>> map = new HashMap<>();
+    public HashMap<Integer, Vertex<Integer>> parseInputIDAsInteger(String filePath){
+        HashMap<Integer, Vertex<Integer>> map = new HashMap<>();
         File inputFile = new File(filePath);
 
         try {
@@ -37,8 +34,8 @@ public class DijkstraV2 extends BaseDijkstra<String> {
                 Node nNode = vertexList.item(i);
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element elem = (Element) nNode;
-                    String vertexId = elem.getAttribute("id");
-                    Vertex<String> vertex = new Vertex<>(vertexId);
+                    int vertexId = Integer.parseInt(elem.getAttribute("id"));
+                    Vertex<Integer> vertex = new Vertex<>(vertexId);
                     NodeList edgeList = elem.getElementsByTagName("edge");
                     addEdgesToAVertex(vertex, edgeList);
                     map.put(vertexId, vertex);
@@ -51,8 +48,8 @@ public class DijkstraV2 extends BaseDijkstra<String> {
         return map;
     }
 
-    public Vertex<String> addEdgesToAVertex(Vertex<String> vertex, NodeList list){
-        List<Edge<String>> edgeList = new ArrayList<>();
+    private Vertex<Integer> addEdgesToAVertex(Vertex<Integer> vertex, NodeList list){
+        List<Edge<Integer>> edgeList = new ArrayList<>();
         for(int j = 0; j < list.getLength(); j++){
             Node mNode = list.item(j);
             if (mNode.getNodeType() == Node.ELEMENT_NODE) {
@@ -75,7 +72,7 @@ public class DijkstraV2 extends BaseDijkstra<String> {
                 if("".equals(weight)){
                     weight = "0";
                 }
-                Edge<String> edge = new Edge<>(vertex.getId(), id, way, Integer.parseInt(weight));
+                Edge<Integer> edge = new Edge<>(vertex.getId(), Integer.parseInt(id), way, Integer.parseInt(weight));
                 edgeList.add(edge);
             }
         }

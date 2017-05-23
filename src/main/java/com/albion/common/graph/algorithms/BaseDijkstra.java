@@ -1,16 +1,20 @@
-package com.albion.common.search.graph;
+package com.albion.common.graph.algorithms;
 
 import com.albion.common.graph.core.v2.Edge;
-import com.albion.common.graph.core.v2.Graph;
+import com.albion.common.graph.core.v2.BaseGraph;
 import com.albion.common.graph.core.v2.Vertex;
 
 import java.util.*;
 
 abstract public class BaseDijkstra<T> {
-    protected Graph<T> graph;
+    protected BaseGraph<T> graph;
+    String filePath;
 
-    public BaseDijkstra(Graph<T> g) {
+    public BaseDijkstra(BaseGraph<T> g) {
         this.graph = g;
+    }
+    public BaseDijkstra(String filePath) {
+        this.filePath = filePath;
     }
 
     public List<Vertex<T>> findShortestDistance(T source, T target) {
