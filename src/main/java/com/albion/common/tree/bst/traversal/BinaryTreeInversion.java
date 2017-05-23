@@ -1,4 +1,4 @@
-package com.albion.common.search.bst;
+package com.albion.common.tree.bst.traversal;
 
 import com.albion.common.tree.node.BinarySearchTreeNode;
 

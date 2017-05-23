@@ -1,6 +1,8 @@
-package com.albion.common.search.bst;
+package com.albion.common.tree.bst.traversal;
 
 import com.albion.common.tree.bst.BinarySearchTree;
+import com.albion.common.tree.bst.traversal.LevelOrderTraversal;
+import com.albion.common.tree.bst.traversal.Traversal;
 import com.albion.common.tree.utils.BinaryTreePrinter;
 import com.albion.common.tree.node.BinarySearchTreeNode;
 import org.testng.annotations.Test;

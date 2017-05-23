@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <verticesMap>
-    <vertices>
-	    <vertex id="San Francisco">
-	        <edge id="New York" weight="8" direction="BOTH" />
-	        <edge id="Los Angeles" weight="9" direction="BOTH" />
-	    </vertex>
-	    <vertex id="New York" >
-	        <edge id="San Francisco" weight="8" direction="BOTH" />
-	        <edge id="Los Angeles" weight="6" direction="BOTH" />
-	   	    <edge id="Boston" weight="7" direction="BOTH" />
-	    </vertex>
-	    <vertex id="Los Angeles" >
-	        <edge id="San Francisco" weight="9" direction="BOTH" />
-	        <edge id="New York" weight="6" direction="BOTH" />
-	   	    <edge id="Boston" weight="5" direction="BOTH" />
-	    </vertex>
-	    <vertex id="Boston" >
-	        <edge id="New York" weight="7" direction="BOTH" />
-	        <edge id="Los Angeles" weight="5" direction="BOTH" />
-	    </vertex>		    	    
-    </vertices>
+	<vertices>
+		<vertex id="San Francisco">
+			<edge id="New York" weight="8" direction="BOTH" />
+			<edge id="Los Angeles" weight="9" direction="BOTH" />
+		</vertex>
+		<vertex id="New York" >
+			<edge id="San Francisco" weight="8" direction="BOTH" />
+			<edge id="Los Angeles" weight="6" direction="BOTH" />
+			<edge id="Boston" weight="7" direction="BOTH" />
+		</vertex>
+		<vertex id="Los Angeles" >
+			<edge id="San Francisco" weight="9" direction="BOTH" />
+			<edge id="New York" weight="6" direction="BOTH" />
+			<edge id="Boston" weight="5" direction="BOTH" />
+		</vertex>
+		<vertex id="Boston" >
+			<edge id="New York" weight="7" direction="BOTH" />
+			<edge id="Los Angeles" weight="5" direction="BOTH" />
+		</vertex>
+	</vertices>
 </verticesMap>

@@ -14,6 +14,10 @@ public class Graph<T>{
         setVerticesMap(new HashMap<>());
     }
 
+    public Graph(HashMap<T, Vertex<T>> map){
+		setVerticesMap(map);
+	}
+
 	public HashMap<T, Vertex<T>> getVerticesMap() {
 		return verticesMap;
 	}

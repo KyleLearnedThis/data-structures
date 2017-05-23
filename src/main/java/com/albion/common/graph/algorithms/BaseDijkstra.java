@@ -1,4 +1,4 @@
-package com.albion.common.search.graph;
+package com.albion.common.graph.algorithms;
 
 import com.albion.common.graph.core.v2.Edge;
 import com.albion.common.graph.core.v2.Graph;
