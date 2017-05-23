@@ -7,14 +7,14 @@ import java.util.Map;
  * 	private T x; private T y;private W weight;
  * 	private M id; private N data;
  */
-public class Graph<T>{
+public class BaseGraph<T>{
 	private HashMap<T, Vertex<T>> verticesMap;
 
-	public Graph() {
+	public BaseGraph() {
         setVerticesMap(new HashMap<>());
     }
 
-    public Graph(HashMap<T, Vertex<T>> map){
+    public BaseGraph(HashMap<T, Vertex<T>> map){
 		setVerticesMap(map);
 	}
 

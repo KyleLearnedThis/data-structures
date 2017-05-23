@@ -1,7 +1,5 @@
 package com.albion.common.graph.algorithms;
 
-import com.albion.common.graph.algorithms.DijkstraV1;
-import com.albion.common.graph.core.v2.Graph;
 import com.albion.common.graph.core.v2.Vertex;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -20,13 +18,10 @@ public class DijkstraV1Test {
 
     @Test(dataProvider = "dp01")
     public void testFindShortestPath(String filePath, int src, int destination, int expectedCost) throws Exception {
-        Graph<Integer> g = new Graph<>();
-        DijkstraV1 dijkstra = new DijkstraV1(g);
-        dijkstra.parseInput(filePath);
-
+        DijkstraV1 dijkstra = new DijkstraV1(filePath);
         List<Vertex<Integer>> result = dijkstra.findShortestDistance(src, destination);
         System.out.println("============");
-        System.out.println(g.toString());
+        System.out.println(dijkstra.getGraph().toString());
 
         System.out.println("[Shortest Path]");
         int size = result.size();

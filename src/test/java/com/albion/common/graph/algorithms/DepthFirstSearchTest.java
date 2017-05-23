@@ -1,7 +1,5 @@
 package com.albion.common.graph.algorithms;
 
-import com.albion.common.graph.algorithms.BreathFirstSearch;
-import com.albion.common.graph.algorithms.DepthFirstSearch;
 import com.albion.common.graph.core.v1.Graph;
 import com.albion.common.graph.core.v1.Vertex;
 import org.testng.Assert;
